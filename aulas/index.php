@@ -1,9 +1,10 @@
 <?php
 
 session_start();
+
 require '../model/init.php';
 require '../model/check.php';
-
+require '../model/destroySession.php';
 
 ?>
 
@@ -26,7 +27,7 @@ require '../model/check.php';
     <div class="container">
 
         <div class="video">
-            <a><i class="fas fa-angle-left"></i> Voltar</a>
+            <a href="../model/logout.php"><i class="fas fa-angle-left"></i> Voltar</a>
 
             <div class="title">
                 <span>Instagram e Facebook Ads</span><br>
@@ -38,7 +39,14 @@ require '../model/check.php';
                 </source>
             </video>
 
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Impedit eius voluptates officiis, repudiandae tenetur ipsum esse </p>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Impedit eius voluptates officiis, repudiandae tenetur ipsum esse  
+            m ipsum dolor, sit amet consectetur adipisicing elit. Impedit eius voluptates officiis, repudiandae tenetur ipsum esse
+            m ipsum dolor, sit amet consectetur adipisicing elit. Impedit eius voluptates officiis, repudiandae tenetur ipsum esse
+            m ipsum dolor, sit amet consectetur adipisicing elit. Impedit eius voluptates officiis, repudiandae tenetur ipsum esse
+            m ipsum dolor, sit amet consectetur adipisicing elit. Impedit eius voluptates officiis, repudiandae tenetur ipsum esse
+            m ipsum dolor, sit amet consectetur adipisicing elit. Impedit eius voluptates officiis, repudiandae tenetur ipsum esse
+            m ipsum dolor, sit amet consectetur adipisicing elit. Impedit eius voluptates officiis, repudiandae tenetur ipsum esse
+            </p>
 
 
             <footer>

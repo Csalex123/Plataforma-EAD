@@ -15,12 +15,12 @@ $(document).ready(function(){
                 $('.loader-div').hide();
                 $(".msg-2").show();   
                 $(".msg-2").css("color","green");
-                $(".msg-2").html("Uma nova senha foi enviada para o seu e-mail.");
+                $(".msg-2").html("Uma nova senha foi enviada ao seu e-mail.");
             }else{
                 $('.loader-div').hide();
                 $(".msg-2").show();
                 $(".msg-2").css("color","red");
-                $(".msg-2").html("Não existe nenhuma conta registrada com este e-mail.");
+                $(".msg-2").html("E-mail inválido.");
                 $(".recover").prop('disabled', false);
             }
         });

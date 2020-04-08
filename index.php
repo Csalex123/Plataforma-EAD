@@ -2,15 +2,14 @@
 
 session_start();
 
-if(!isset($_SESSION['logged_in'])){
+if (!isset($_SESSION['logged_in'])) {
     $_SESSION['logged_in'] = false;
 }
 
-if($_SESSION['logged_in']){
+if ($_SESSION['logged_in']) {
     header('Location: aulas/');
     exit;
 }
-
 
 ?>
 
@@ -19,74 +18,65 @@ if($_SESSION['logged_in']){
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
     <title>Berlim Digital - A Brand New Horizon!</title>
+
     <link rel="icon" href="img/favicon.png" />
+    <link rel="stylesheet" href="css/style.css">
 
-    <link rel="stylesheet" href="css/styles.css">
-
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 </head>
 
 <body>
 
-    <div style="margin-top: 5%;" class="valign-wrapper row login-box">
-        <div class="col s10 pull-s1 m6 pull-m3 l4 pull-l4">
-            <div class="card hoverable">
+    <header>
+        <nav>
+            <div>
+                <img height="70" src="img/img_0002.svg" alt="">
+            </div>
+            <div>
+                <p>Aulas Online</p>
+            </div>
+        </nav>
+    </header>
+
+
+    <main>
+        <div class="container-1">
+            <img src="img/img_0001.png" alt="Berlim Digital">
+        </div>
+
+        <div class="container-2">
+
+            <span>BEM-VINDO!</span>
+
+            <p>Você está prestes a mergulhar dentro do universo de Treinamentos em Marketing Digital. Faça o seu login e983
+                boas aulas!</p>
+
+            <div class="container-form">
                 <form id="form-login">
-                    <div class="card-content">
-                        <span class="card-title center">
-                            <img src="img/logo-berlimDigital-home.png" alt="" width="140">
-                        </span>
-                        <div class="row">
-                            <div class="input-field col s11">
-                                <i class="material-icons prefix">person</i>
-                                <input name="email" id="email" type="email" class="validate">
-                                <label for="email">E-mail</label>
-                                <p class="email-ic">E-mail incorreto</p>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="input-field col s11">
-                                <i class="material-icons prefix">vpn_key</i>
-                                <input name="senha" id="password" type="password" class="validate">
-                                <label for="password">Senha</label>
-                                <p class="password-ic">Senha incorreta</p>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <p class="msg"></p>
-                        </div>
-
-                        <div class="row">
-                            <p class="right">
-                                <a href="#forgotPassword" class="modal-trigger">Esqueci minha senha</a>
-                            </p>
-                        </div>
+                    <p class="msg"></p>
+                    <div class="group-inputs">
+                        <input  require id="email"   type="email" placeholder="Email de acesso" >
+                        <input  require  id="password" type="password" placeholder="Senha" >
                     </div>
-                    <div class="card-action">
-                        <button type="submit" class="waves-effect waves-light btn right">ENTRAR</button>
+
+                    <div class="group-button">
+                        <a href="#open-modal"> Esqueci a senha</a>
+                        <button type="submit">Entrar</button>
                     </div>
                 </form>
             </div>
+            <p>Você recebeu o acesso e senha no seu e-mail.</p>
         </div>
-    </div>
+    </main>
 
 
-    <div id="forgotPassword" class="modal ">
-        <form id="form-password">
-            <div class="modal-content">
-                <div class="center">
-                    <img src="img/logo-berlimDigital-home.png" alt="" width="140">
-                </div>
-                <h5 class="center">Recuperação de conta</h5>
-
-                <div class="row">
-                    <p>Nos informe seu e-mail e nós enviaremos uma nova senha para você.</p>
-                </div>
+    <form id="form-password">
+        <div id="open-modal" class="modal-window">
+            <div>
+                <a href="#" title="Fechar modal" class="modal-close">Fechar</a>
+                <h1>Nos informe seu e-mail</h1>
 
                 <div class="loader-div">
                     <div>
@@ -95,27 +85,28 @@ if($_SESSION['logged_in']){
                     <div class="loader"></div>
                 </div>
 
-                <div class="input-field col s11">
-                    <i class="material-icons prefix">person</i>
-                    <input name="email" id="email-2" type="email" class="validate">
-                    <label for="email-2">E-mail</label>
-                </div>
-
                 <p class="msg-2"></p>
 
-            </div>
-            <div class="modal-footer">
-                <div class="group-button">
-                    <a href="#!" class="modal-close waves-effect waves-green  btn-small red">CANCELAR</a>
-                    <button type="submit" class="recover waves-effect waves-light btn-small">Recuperar</button>
+                <div>
+                    <input type="email" name="email" id="email-2" maxlength="100" placeholder="Email">
+                    <button class="recover" type="submit">Recuperar</button>
                 </div>
             </div>
-        </form>
-    </div>
+        </div>
+    </form>
 
+    <footer>
+        <div>
+            <p>Berlim Digital - 2020. Todos os direitos Reservados.</p>
+        </div>
+        <div>
+            <a href="">
+                <p><i class="fab fa-whatsapp"></i> Fale Conosco</p>
+            </a>
+        </div>
+    </footer>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="js/home.js"></script>
     <script src="js/recoverPassword.js"></script>
 </body>

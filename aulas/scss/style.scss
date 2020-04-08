@@ -66,26 +66,26 @@ body {
 
     @include mobile() {
         flex-direction: column;
-        max-height: 100vh;
+        max-height: 100%;
     }
 
     @include landscape() {
         flex-direction: column;
-        max-height: 100vh;
+        max-height: 100%;
     }
 
     @include tablet() {
         flex-direction: column;
-        max-height: 100vh;
+        max-height: 100%;
     }
 
     @include desktop() {
         flex-direction: row;
-        max-height: 120vh;
+        height: 145vh;
     }
 
     @include desktop-full(){
-        max-height: 110vh;
+        max-height: 100vh;
     }
 
     .video {
