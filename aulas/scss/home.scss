@@ -61,6 +61,7 @@ body {
     box-sizing: border-box;
     background-color: #1c161a;
     color: white;
+
 }
 
 header {
@@ -68,7 +69,7 @@ header {
     nav {
         @include flex-box();
       
-        margin: 20px 50px;
+        margin: 20px 0px;
 
         @include mobile(){
             justify-content: center;
@@ -83,7 +84,15 @@ header {
         div{
             @include flex-box(); 
             align-items: center;
-            margin: 0 20px;
+
+            @include mobile(){
+                margin: 0 10px;
+            }
+
+            @include tablet(){
+                margin: 0 20px;
+            }
+            
 
             .logout{
                 border: 1px solid #5DB3FF;
@@ -98,7 +107,6 @@ header {
         }
 
         .header-div-1{
-
             @include mobile{
                 margin: 0 0px;
             }
@@ -107,10 +115,15 @@ header {
                 margin: 0 20px;
             }
 
+            span{
+                font-size: 14px;
+                color: #FF43AA;
+            }
+
             div:first-child{
                 cursor: pointer;
                 border: 2px solid #5DB3FF;
-                padding: 7px 8px;
+                padding: 7px 9px;
                 border-radius: 50%;
                 @include mobile(){
                     display: block;
@@ -239,7 +252,7 @@ main {
                 flex-direction: column;
             }
 
-            @include tablet() {
+            @include desktop(){
                 flex-direction: row;
             }
 
@@ -259,14 +272,21 @@ main {
                 justify-content: space-around;
 
                 div {
-                    margin: 10px 0;
+                    margin: 20px 0;
                 }
 
                 a {
                     cursor: pointer;
+                    border: 1px solid #5DB3FF;
+                    @include border-radius(20px);
+                    padding: 5px 20px 10px 20px;
                     img.a {
                         vertical-align: top;
                         padding-right: 10px;
+                    }
+
+                    &:hover{
+                        background-color: #5DB3FF ;
                     }
                 }
             }
@@ -554,4 +574,13 @@ div.tooltips {
     left: 50%;
     margin-left: -76px;
     z-index: 999;
+  }
+
+
+  .ytp-cards-button-icon{
+      display: none;
+  }
+
+  .ytp-title-link{
+    display: none !important;
   }
