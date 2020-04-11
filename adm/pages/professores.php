@@ -49,8 +49,8 @@ $objLogin->verificarLogado();
                                 <div class="page-header-title">
                                     <i class="ik ik-users bg-blue"></i>
                                     <div class="d-inline">
-                                        <a href="cadastrarAluno.php">
-                                            <button type="button" class="btn btn-primary">Cadastrar aluno</button>
+                                        <a href="cadastrarProfessor.php">
+                                            <button type="button" class="btn btn-primary">Cadastrar Professor</button>
                                         </a>
                                     </div>
                                 </div>
@@ -64,7 +64,7 @@ $objLogin->verificarLogado();
                             <div class="card">
                                 <div class="card-body">
                                     <div class="d-inline">
-                                        <h1>Alunos</h1>
+                                        <h1>Professores</h1>
                                     </div>
                                     <table id="data_table" class="table">
                                         <thead>

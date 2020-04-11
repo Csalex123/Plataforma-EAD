@@ -12,7 +12,7 @@ include_once "Usuario.class.php";
 class Login extends Conexao{
 	
 		
-	private $tempolimite = 120;
+	private $tempolimite = 600;
     
 	function __construct(){
       

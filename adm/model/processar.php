@@ -15,8 +15,10 @@ switch($entidade){
             case 'logar':
               $email = $_POST['email'];
               $senha = $_POST['senha'];
+
+
              
-              $retorno = $objLogin->logar($email,$senha);
+              $retorno = $objLogin->logar($email,sha1($senha));
               
               if($retorno == 'erroSenha' ){
                 echo "1";

@@ -4,7 +4,7 @@ class Conexao{
    private $servidor="localhost";
    private $usuario="root";
    private $senha="";
-   private $banco="berlim";
+   private $banco="berlim_ead";
 
    private $conn = null;
    private $query = null;

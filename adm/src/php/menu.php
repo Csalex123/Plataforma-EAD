@@ -19,11 +19,14 @@ $paginaLink = basename($_SERVER['SCRIPT_NAME']);
                                 <div <?php if($paginaLink == "index.php") {echo 'class="nav-item active"';}else{echo 'class="nav-item"';} ?>>
                                     <a href=" ../pages/index.php"><i class="ik ik-bar-chart-2"></i><span>Painel de Controle</span></a>
                                 </div>
+                                <div <?php if($paginaLink == "professores.php") {echo 'class="nav-item active"';}else{echo 'class="nav-item"';} ?>>
+                                    <a href="../pages/professores.php"><i class="ik ik-user"></i><span>Professores</span></a>
+                                </div>
                                 <div <?php if($paginaLink == "alunos.php") {echo 'class="nav-item active"';}else{echo 'class="nav-item"';} ?>>
                                     <a href="../pages/alunos.php"><i class="ik ik-users"></i><span>Alunos</span></a>
                                 </div>
-                                <div <?php if($paginaLink == "cursos.php") {echo 'class="nav-item active"';}else{echo 'class="nav-item"';} ?>>
-                                    <a href="../pages/cursos.php"><i class="ik ik-clipboard"></i><span>Cursos</span></a>
+                                <div <?php if($paginaLink == "curso.php") {echo 'class="nav-item active"';}else{echo 'class="nav-item"';} ?>>
+                                    <a href="../pages/curso.php"><i class="ik ik-clipboard"></i><span>Cursos</span></a>
                                 </div>
                                 <div class="nav-item" >
                                     <a href="../src/php/logout.php"><i class="ik ik-log-out"></i><span>Sair</span></a>

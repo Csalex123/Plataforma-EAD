@@ -64,14 +64,14 @@ $objLogin->verificarLogado();
                                     </div>
                                 </div>
                             </div>
-                           
+
                             <div class="col-lg-3 col-md-6 col-sm-12">
                                 <div class="widget">
                                     <div class="widget-body">
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="state">
                                                 <h6>Cursos</h6>
-                                                <h2>410</h2>
+                                                <h2>10</h2>
                                             </div>
                                             <div class="icon">
                                                 <i class="ik ik-clipboard"></i>
@@ -80,12 +80,46 @@ $objLogin->verificarLogado();
                                     </div>
                                 </div>
                             </div>
+                           
                             <div class="col-lg-3 col-md-6 col-sm-12">
                                 <div class="widget">
                                     <div class="widget-body">
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="state">
-                                                <h6>Comentarios</h6>
+                                                <h6>Aulas</h6>
+                                                <h2>30</h2>
+                                            </div>
+                                            <div class="icon">
+                                                <i class="ik ik-clipboard"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-md-6 col-sm-12">
+                                <div class="widget">
+                                    <div class="widget-body">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="state">
+                                                <h6>Professores</h6>
+                                                <h2>5</h2>
+                                            </div>
+                                            <div class="icon">
+                                                <i class="ik ik-users"></i>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+<!-- 
+                            <div class="col-lg-3 col-md-6 col-sm-12">
+                                <div class="widget">
+                                    <div class="widget-body">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="state">
+                                                <h6>Quantidade de likes</h6>
                                                 <h2>4500</h2>
                                             </div>
                                             <div class="icon">
@@ -95,7 +129,9 @@ $objLogin->verificarLogado();
                                         
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
+
+
                         </div>
                       
                     </div>
