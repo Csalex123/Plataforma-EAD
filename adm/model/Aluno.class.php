@@ -1,15 +1,21 @@
 <?php 
-class Usuario{
+class Aluno{
 
     private $id;
     private $nome;
     private $email;
 	private $senha;
-	private $loginAtivo;
+    private $loginAtivo;
+    private $bloqueado;
 	
 
     public function __construct(){
-
+        $this->id = " ";
+        $this->nome = " ";
+        $this->email = " ";
+        $this->senha = " ";
+        $this->loginAtivo = " ";
+        $this->bloqueado = " ";
     }
    
     //get e set
@@ -52,6 +58,14 @@ class Usuario{
 
 	public function setLoginAtivo($loginAtivo){
 		$this->loginAtivo = $loginAtivo;
+    }
+    
+    public function bloqueado(){
+		return $this->bloqueado;
+	}
+
+	public function setBloqueado($bloqueado){
+		$this->bloqueado = $bloqueado;
 	}
 
 }

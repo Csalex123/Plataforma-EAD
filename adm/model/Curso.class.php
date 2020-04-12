@@ -1,4 +1,5 @@
-<?php 
+<?php
+include_once "Professor.class.php"; 
 class Curso{
 
 	private $id;
@@ -6,6 +7,7 @@ class Curso{
 	private $img;
 	private $descricao;
 	private $hashtag;
+	private $objProfessor;
 
 
     public function __construct(){
@@ -13,7 +15,8 @@ class Curso{
       $this->nome = " ";
       $this->img = " ";
       $this->descricao = " ";
-      $this->hashtag = " ";
+	  $this->hashtag = " ";
+	  $this->objProfessor = new Professor();
 
     }
     
@@ -58,6 +61,14 @@ class Curso{
 
 	public function setHashtag($hashtag){
 		$this->hashtag = $hashtag;
+	}
+
+	public function getObjProfessor(){
+		return $this->objProfessor;
+	}
+
+	public function setObjProfessor($objProfessor){
+		$this->objProfessor = $objProfessor;
 	}
 
 

@@ -27,7 +27,7 @@ $objLogin->verificarLogado();
     <link rel="stylesheet" href="../plugins/fullcalendar/dist/fullcalendar.min.css">
     <link rel="stylesheet" href="../plugins/perfect-scrollbar/css/perfect-scrollbar.css">
     <link rel="stylesheet" href="../plugins/tempusdominus-bootstrap-4/build/css/tempusdominus-bootstrap-4.min.css">
-    <link rel="stylesheet" href="../dist/css/theme.min.css">
+    <link rel="stylesheet" href="../dist/css/theme.css">
     <script src="../src/js/vendor/modernizr-2.8.3.min.js"></script>
 
 </head>

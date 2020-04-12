@@ -4,7 +4,7 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
      session_start();
 }
 include_once "Conexao.class.php";
-include_once "Usuario.class.php";
+include_once "Administrador.class.php";
 
 /**
 * 
@@ -12,7 +12,7 @@ include_once "Usuario.class.php";
 class Login extends Conexao{
 	
 		
-	private $tempolimite = 600;
+	private $tempolimite = 900;
     
 	function __construct(){
       
@@ -58,7 +58,7 @@ class Login extends Conexao{
 	
 		try {
 			$conn = $this->conectar();
-			$sql = "UPDATE usuario SET loginAtivo = :loginAtivo WHERE id = :id";
+			$sql = "UPDATE administrador SET loginAtivo = :loginAtivo WHERE id = :id";
 			$stmt = $conn->prepare($sql);
 			$stmt->bindParam(':loginAtivo', $sessao);
 			$stmt->bindParam(':id', $id);
@@ -75,7 +75,7 @@ class Login extends Conexao{
 	
 		try {
 			$conn = $this->conectar();
-			$sql = "UPDATE usuario SET loginAtivo = :loginAtivo WHERE id = :id";
+			$sql = "UPDATE administrador SET loginAtivo = :loginAtivo WHERE id = :id";
 			$stmt = $conn->prepare($sql);
 			$stmt->bindParam(':loginAtivo', $sessao);
 			$stmt->bindParam(':id', $id);
@@ -93,7 +93,7 @@ class Login extends Conexao{
 	public function logar($email,$senha){
 		
 		$conn = $this->conectar();
-		$sql = "SELECT id, nome, loginAtivo,email,senha FROM usuario WHERE email = :email";
+		$sql = "SELECT id, nome, loginAtivo,email,senha FROM administrador WHERE email = :email";
 		$stmt = $conn->prepare($sql);
  
 		$stmt->bindParam(':email', $email);
@@ -110,13 +110,13 @@ class Login extends Conexao{
 
 					
 					if($this->atualizarSessaoBD(1, $users[0]["id"]) == true){
-						$objUsuario =  new Usuario();
+						$objAdministrador =  new Administrador();
 	
-						$objUsuario->setId($users[0]["id"]);
-						$objUsuario->setNome($users[0]["nome"]);
-						$objUsuario->setEmail($users[0]["email"]);
-						$objUsuario->setloginAtivo($users[0]["loginAtivo"]);
-						$_SESSION["objUser"] = serialize($objUsuario);
+						$objAdministrador->setId($users[0]["id"]);
+						$objAdministrador->setNome($users[0]["nome"]);
+						$objAdministrador->setEmail($users[0]["email"]);
+						$objAdministrador->setloginAtivo($users[0]["loginAtivo"]);
+						$_SESSION["objUser"] = serialize($objAdministrador);
 						$_SESSION["logado"] = "sim";
 						$_SESSION['registro'] = time(); // armazena o momento em que autenticado //
  						$_SESSION['limite'] = $this->tempolimite; // armazena o tempo limite sem atividade //
@@ -135,7 +135,7 @@ class Login extends Conexao{
 			
 		}else{
 
-			return 'usuarioInexistente';
+			return 'administradorInexistente';
 		}
     		
 		

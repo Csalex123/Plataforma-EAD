@@ -1,8 +1,12 @@
 <?php
 include_once "../model/Login.class.php";
+include_once "../model/CrudProfessor.class.php";
 
 $objLogin = new  Login();
+$objCrud = new CrudProfessor();
 $objLogin->verificarLogado();
+$id = $_POST['id'];
+$professor = $objCrud->consultarProfessorId($id);
 
 ?>
 <!doctype html>
@@ -54,7 +58,7 @@ $objLogin->verificarLogado();
 
                                     <div class="d-inline">
 
-                                        <h5>Cadastro de Professor</h5>
+                                        <h5>Editar de Professor</h5>
                                     </div>
                                 </div>
                             </div>
@@ -67,24 +71,25 @@ $objLogin->verificarLogado();
                             <div class="card">
                                 <div class="card-body">
 
-                                    <form id="formulario-professor-cadastrar">
+                                    <form id="formulario-professor-editar">
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="">Nome</label>
-                                                    <input  type="text" id="txtNome" class="form-control" placeholder="Nome">
+                                                    <input  type="text" id="txtNome" value="<?php echo $professor->getNome(); ?>" class="form-control" placeholder="Nome">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="">Email</label>
-                                                    <input  type="text" id="txtEmail" class="form-control" placeholder="Email">
+                                                    <input  type="text" id="txtEmail" value="<?php echo $professor->getEmail(); ?>" class="form-control" placeholder="Email">
                                                 </div>
                                             </div>
+                                            <input type="hidden" id="txtId" value="<?php echo $id; ?>" />
 
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <button type="submit" class="btn btn-primary">Cadastrar Professor</button>
+                                                    <button type="submit" class="btn btn-primary">Editar Professor</button>
                                                 </div>
                                             </div>
 
@@ -123,6 +128,16 @@ $objLogin->verificarLogado();
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script src="../js/datatables.js"></script>
     <script src="../src/js/professor.js"></script>
+
+
+    <script>
+     
+
+       
+    </script>
+    <script>
+     
+    </script>
 
 
 </body>

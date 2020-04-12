@@ -1,7 +1,10 @@
 <?php
 include_once "../model/Login.class.php";
+include_once "../model/Controller.class.php";
+
 
 $objLogin = new  Login();
+$objController = new Controller();
 $objLogin->verificarLogado();
 ?>
 <!doctype html>
@@ -25,13 +28,13 @@ $objLogin->verificarLogado();
     <link rel="stylesheet" href="../plugins/icon-kit/dist/css/iconkit.min.css">
     <link rel="stylesheet" href="../plugins/fullcalendar/dist/fullcalendar.min.css">
     <link rel="stylesheet" href="../plugins/perfect-scrollbar/css/perfect-scrollbar.css">
-    <link rel="stylesheet" href="../plugins/tempusdominus-bootstrap-4/build/css/tempusdominus-bootstrap-4.min.css">
-    <link rel="stylesheet" href="../dist/css/theme.min.css">
+    <link rel="stylesheet" href="../plugins/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="../dist/css/theme.css">
     <script src="../src/js/vendor/modernizr-2.8.3.min.js"></script>
 
 </head>
 
-<body name="alunos">
+<body onload="atualizarTabela();">
     <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -57,106 +60,40 @@ $objLogin->verificarLogado();
                             </div>
                         </div>
                     </div>
-
-
                     <div class="row">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="d-inline">
-                                        <h1>Professores</h1>
-                                    </div>
-                                    <table id="data_table" class="table">
+                        <div class="card">
+                            <div class="card-header d-block">
+                                <h3>Professores</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="dt-responsive">
+                                    <table id="scr-vrt-dt" class="table table-striped table-bordered nowrap">
                                         <thead>
                                             <tr>
-                                                <th>Id</th>
                                                 <th class="nosort">Avatar</th>
-                                                <th>Name</th>
-                                                <th>Email</th>
-                                                <th>Status</th>
-                                                <th class="nosort">&nbsp;</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>001</td>
-                                                <td><img src="../img/users/1.jpg" class="table-user-thumb" alt=""></td>
-                                                <td>Erich Heaney</td>
-                                                <td>erich@example.com</td>
-                                                <td>Disponível</td>
-          
-                                                <td>
-                                                    <div class="table-actions">
-                                                        <a href="#"><i class="ik ik-eye"></i></a>
-                                                        <a href="#" title="editar"><i class="ik ik-edit-2"></i></a>
-                                                        <a href="#" title="Bloquear"><i class="ik ik-slash"></i></a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>002</td>
-                                                <td><img src="../img/users/2.jpg" class="table-user-thumb" alt=""></td>
-                                                <td>Abraham Douglas</td>
-                                                <td>jgraham@example.com</td>
-                                                <td>Disponível</td>
-                                                <td>
-                                                    <div class="table-actions">
-                                                        <a href="#"><i class="ik ik-eye"></i></a>
-                                                        <a href="#" title="editar"><i class="ik ik-edit-2"></i></a>
-                                                        <a href="#" title="Bloquear"><i class="ik ik-slash"></i></a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>003</td>
-                                                <td><img src="../img/users/3.jpg" class="table-user-thumb" alt=""></td>
-                                                <td>Roderick Simonis</td>
-                                                <td>grant.simonis@example.com</td>
-                                                <td>Disponível</td>
-                                                <td>
-                                                    <div class="table-actions">
-                                                        <a href="#"><i class="ik ik-eye"></i></a>
-                                                        <a href="#" title="editar"><i class="ik ik-edit-2"></i></a>
-                                                        <a href="#" title="Bloquear"><i class="ik ik-slash"></i></a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>004</td>
-                                                <td><img src="../img/users/4.jpg" class="table-user-thumb" alt=""></td>
-                                                <td>Christopher Henry</td>
-                                                <td>henry.chris@example.com</td>
-                                                <td>Disponível</td>
-                                                <td>
-                                                    <div class="table-actions">
-                                                        <a href="#"><i class="ik ik-eye"></i></a>
-                                                        <a href="#" title="editar"><i class="ik ik-edit-2"></i></a>
-                                                        <a href="#" title="Bloquear"><i class="ik ik-slash"></i></a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>005</td>
-                                                <td><img src="../img/users/5.jpg" class="table-user-thumb" alt=""></td>
-                                                <td>Sonia Wilkinson</td>
-                                                <td>boyle.aglea@example.com</td>
-                                                <td>Bloqueado</td>
-                                                <td>
-                                                    <div class="table-actions">
-                                                        <a href="#"><i class="ik ik-eye"></i></a>
-                                                        <a href="#" title="editar"><i class="ik ik-edit-2"></i></a>
-                                                        <a href="#" title="Bloquear"><i class="ik ik-slash"></i></a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-
-
-                                        </tbody>
+                                                    <th>Nome</th>
+                                                    <th>Email</th>
+                                                    <th>Status</th>
+                                                    <th class="nosort">&nbsp;</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody id="tbBodyProfessor">
+    
+                                                </tbody>
+                                                    
                                     </table>
+                                    <form action="editarProfessor.php" method="post" name="enviar_parametros" >
+                                    <input type="hidden" id="id" name="id" value="" />
+                                  
+                                    
+                                    </form>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    
+
+                  
 
                 </div>
             </div>
@@ -170,7 +107,7 @@ $objLogin->verificarLogado();
         </div>
     </div>
 
-
+    
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script>
         window.jQuery || document.write('<script src="../src/js/vendor/jquery-3.3.1.min.js"><\/script>')
@@ -179,11 +116,22 @@ $objLogin->verificarLogado();
     <script src="../plugins/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="../plugins/perfect-scrollbar/dist/perfect-scrollbar.min.js"></script>
     <script src="../plugins/screenfull/dist/screenfull.js"></script>
-    <script src="../plugins/moment/moment.js"></script>
-    <script src="../plugins/fullcalendar/dist/fullcalendar.min.js"></script>
-    <script src="../plugins/tempusdominus-bootstrap-4/build/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script src="../plugins/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="../plugins/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
     <script src="../dist/js/theme.min.js"></script>
-    <script src="../js/calendar.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="../js/datatables.js"></script>
+    <script src="../src/js/professor.js"></script>
+    <script type='text/javascript'>
+        //funcao para atualizar tabela quando 
+        function atualizarTabela(){
+            
+            document.getElementById('tbBodyProfessor').innerHTML = " ";
+            document.getElementById('tbBodyProfessor').innerHTML = '<?php $objController->listarProfessores();?>';
+        }
+    </script>
+
+    
 
 
 
