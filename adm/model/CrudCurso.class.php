@@ -13,17 +13,17 @@ class CrudCurso extends Conexao{
       
     }
     
-    public function cadastrarCurso($nome,$img,$hashtag,$descricao,$objProfessor){
+    public function cadastrarCurso($nome,$img,$hashtag,$descricao,$idProfessor){
       
         try {
           $conn = $this->conectar();
-          $sql = "INSERT INTO curso (nome, img, hashtag,descricao,id_professor) VALUES (?, ?, ?, ?, ?)";
+          $sql = "INSERT INTO curso (nome, img, hashtag,descricao,idProfessor) VALUES (?, ?, ?, ?, ?)";
           $stmt = $conn->prepare($sql);
                 $stmt->bindParam(1, $nome);
                 $stmt->bindParam(2, $img);
                 $stmt->bindParam(3, $hashtag);
                 $stmt->bindParam(4, $descricao);
-                $stmt->bindParam(5, $objProfessor->getId());
+                $stmt->bindParam(5, $idProfessor);
 
                 
                 if ($stmt->execute()) {
@@ -44,27 +44,24 @@ class CrudCurso extends Conexao{
         }
     }
     
-    public function editarCurso($id,$nome,$img,$hashtag,$descricao,$objProfessor){
+    public function editarCurso($id,$nome,$img,$hashtag,$descricao,$idProfessor){
 	
         try {
           $conn = $this->conectar();
-          $sql = "UPDATE curso SET nome=?, img=?, hashtag=?, descricao=?, id_professor=? WHERE id = ?";
+          $sql = "UPDATE curso SET nome=?, img=?, hashtag=?, descricao=?, idProfessor=? WHERE id = ?";
           $stmt = $conn->prepare($sql);
                 $stmt->bindParam(1, $nome);
                 $stmt->bindParam(2, $img);
                 $stmt->bindParam(3, $hashtag);
                 $stmt->bindParam(4, $descricao);
-                $stmt->bindParam(5, $objProfessor->getId());
+                $stmt->bindParam(5, $idProfessor);
                 $stmt->bindParam(6, $id);
 
                 
                 if ($stmt->execute()) {
-                    if ($stmt->rowCount() > 0) {
+                    
                       return true;
                     
-                    } else {
-                      return false;
-                    }
                 } else {
                       throw new PDOException("Erro: Não foi possível executar a declaração sql");
                       return false;
@@ -116,7 +113,6 @@ class CrudCurso extends Conexao{
               if ($stmt->execute()) {
                   $rs = $stmt->fetch(PDO::FETCH_OBJ);
                   $objProfessor->setId($rs->idProfessor);
-                  $objProfessor->setNome($rs->nomeProfessor);
                   $objCurso->setId($rs->id);
                   $objCurso->setNome($rs->nome);
                   $objCurso->setImg($rs->img);
@@ -143,7 +139,7 @@ class CrudCurso extends Conexao{
 	
       try {
         $conn = $this->conectar();
-        $sql = "SELECT * FROM curso";
+        $sql = "SELECT curso.id, curso.nome, curso.img, professor.id as idProfessor from curso inner join professor on curso.idProfessor = professor.id";
         $stmt = $conn->prepare($sql);
         $listaCursos = array();
               
@@ -153,12 +149,9 @@ class CrudCurso extends Conexao{
                   $objProfessor = new Professor();
                   $objCurso = new Curso();
                   $objProfessor->setId($rs->idProfessor);
-                  $objProfessor->setNome($rs->nomeProfessor);
                   $objCurso->setId($rs->id);
                   $objCurso->setNome($rs->nome);
                   $objCurso->setImg($rs->img);
-                  $objCurso->setHashtag($rs->hashtag);
-                  $objCurso->setDescricao($rs->descricao);
                   $objCurso->setObjProfessor($objProfessor);
                   $listaCursos[]=$objCurso;
               }

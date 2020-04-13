@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 12-Abr-2020 às 14:41
+-- Tempo de geração: 13-Abr-2020 às 04:45
 -- Versão do servidor: 10.4.11-MariaDB
 -- versão do PHP: 7.4.3
 
@@ -54,9 +54,17 @@ CREATE TABLE `curso` (
   `id` int(11) NOT NULL,
   `nome` varchar(45) NOT NULL,
   `img` varchar(45) DEFAULT NULL,
-  `hashtag` varchar(45) DEFAULT NULL,
-  `descricao` text NOT NULL
+  `hashtag` varchar(150) DEFAULT NULL,
+  `descricao` text NOT NULL,
+  `idProfessor` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `curso`
+--
+
+INSERT INTO `curso` (`id`, `nome`, `img`, `hashtag`, `descricao`, `idProfessor`) VALUES
+(1, 'curso12a', '20113187485e93d2183fd33.jpg', 'klk,lkl,dss', 'testesd', 1);
 
 -- --------------------------------------------------------
 
@@ -78,13 +86,7 @@ CREATE TABLE `professor` (
 --
 
 INSERT INTO `professor` (`id`, `nome`, `email`, `senha`, `loginAtivo`, `bloqueado`) VALUES
-(1, 'professor', 'professor@teste.com.br', NULL, 0, 0),
-(2, 'professor2', 'professor2@teste.com.br', NULL, 0, 0),
-(3, 'professor4', 'professor4@teste.com.br', NULL, 0, 0),
-(5, 'professor', 'professor111@teste.com.br', NULL, 0, 0),
-(6, 'professor5', 'professor111@teste.com.br', NULL, 0, 0),
-(7, 'professor6', 'professor453@teste.com.br', NULL, 0, 0),
-(8, 'professor677', 'professor677@teste.com.br', NULL, 0, 0);
+(1, 'professor', 'professor@teste.com.br', NULL, 0, 0);
 
 --
 -- Índices para tabelas despejadas
@@ -100,7 +102,8 @@ ALTER TABLE `administrador`
 -- Índices para tabela `curso`
 --
 ALTER TABLE `curso`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idProfessor` (`idProfessor`);
 
 --
 -- Índices para tabela `professor`
@@ -122,13 +125,23 @@ ALTER TABLE `administrador`
 -- AUTO_INCREMENT de tabela `curso`
 --
 ALTER TABLE `curso`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `professor`
 --
 ALTER TABLE `professor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Restrições para despejos de tabelas
+--
+
+--
+-- Limitadores para a tabela `curso`
+--
+ALTER TABLE `curso`
+  ADD CONSTRAINT `curso_ibfk_1` FOREIGN KEY (`idProfessor`) REFERENCES `professor` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

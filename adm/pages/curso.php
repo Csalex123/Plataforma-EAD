@@ -1,7 +1,9 @@
 <?php
 include_once "../model/Login.class.php";
+include_once "../model/Controller.class.php";
 
 $objLogin = new  Login();
+$objController = new  Controller();
 $objLogin->verificarLogado();
 ?>
 <!doctype html>
@@ -32,7 +34,7 @@ $objLogin->verificarLogado();
 
 </head>
 
-<body name="index">
+<body  onload="atualizar();">
     <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -57,9 +59,9 @@ $objLogin->verificarLogado();
                             </div>
                         </div>
                     </div>
-                    <div class="row clearfix">
+                    <div class="row clearfix cursos">
 
-                        <div class="col-xl-3 col-md-6">
+                        <div class="col-xl-3 col-md-6" style="margin-right:0px;">
                             <div class="card sale-card">
                                 <a href="cadastrarCurso.php">
                                     <div id="add-curso" class="card-block text-center" style="height: 305px;">
@@ -71,148 +73,12 @@ $objLogin->verificarLogado();
                                 </a>
                             </div>
                         </div>
+                       
 
-                        <div class="col-xl-3 col-md-6">
-                            <div class="card sale-card">
-                                <div class="card-header">
-                                    <h3>Curso1</h3>
-                                    <div class="dropdown no-arrow" style="top:20px; right: 10px; position: absolute;">
-                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" style="color:black;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                                            <div class="dropdown-header">Opções:</div>
-                                            <a class="dropdown-item" href="#">Editar</a>
-                                            <a class="dropdown-item" href="#">Excluir</a>
-                                            <div class="dropdown-divider"></div>
-
-                                            <a class="dropdown-item" href="#">Adicionar Conteudo</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-block text-center">
-                                    <div data-label="40%" class="radial-bar radial-bar-40 radial-bar-lg radial-bar-danger">
-                                        <img src="../img/users/6.jpg" alt="User-Image">
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <h5 class="fw-700 mb-0">0</h5>
-                                            <p class="mb-0"><a href="#listarAlunos" data-toggle="modal" data-target="#listarAlunos">Alunos</a></p>
-                                        </div>
-                                        <div class="col-6 border-left">
-                                            <h5 class="fw-700 mb-0">0</h5>
-                                            <p class="mb-0"><a href="#editLayoutItem" data-toggle="modal" data-target="#editLayoutItem">Aulas</a></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-xl-3 col-md-6">
-                            <div class="card sale-card">
-                                <div class="card-header">
-                                    <h3>Curso1</h3>
-                                    <div class="dropdown no-arrow" style="top:20px; right: 10px; position: absolute;">
-                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" style="color:black;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                                            <div class="dropdown-header">Opções:</div>
-                                            <a class="dropdown-item" href="#">Editar</a>
-                                            <a class="dropdown-item" href="#">Excluir</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Adicionar Conteudo</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-block text-center">
-                                    <div data-label="40%" class="radial-bar radial-bar-40 radial-bar-lg radial-bar-danger">
-                                        <img src="../img/users/6.jpg" alt="User-Image">
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <h5 class="fw-700 mb-0">0</h5>
-                                            <p class="mb-0">Alunos</p>
-                                        </div>
-                                        <div class="col-6 border-left">
-                                            <h5 class="fw-700 mb-0">0</h5>
-                                            <p class="mb-0">Conteudo</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-xl-3 col-md-6">
-                            <div class="card sale-card">
-                                <div class="card-header">
-                                    <h3>Curso1</h3>
-                                    <div class="dropdown no-arrow" style="top:20px; right: 10px; position: absolute;">
-                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" style="color:black;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                                            <div class="dropdown-header">Opções:</div>
-                                            <a class="dropdown-item" href="#">Editar</a>
-                                            <a class="dropdown-item" href="#">Excluir</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Adicionar Conteudo</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-block text-center">
-                                    <div data-label="40%" class="radial-bar radial-bar-40 radial-bar-lg radial-bar-danger">
-                                        <img src="../img/users/6.jpg" alt="User-Image">
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <h5 class="fw-700 mb-0">0</h5>
-                                            <p class="mb-0">Alunos</p>
-                                        </div>
-                                        <div class="col-6 border-left">
-                                            <h5 class="fw-700 mb-0">0</h5>
-                                            <p class="mb-0">Conteudo</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-xl-3 col-md-6">
-                            <div class="card sale-card">
-                                <div class="card-header">
-                                    <h3>Curso1</h3>
-                                    <div class="dropdown no-arrow" style="top:20px; right: 10px; position: absolute;">
-                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" style="color:black;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                                            <div class="dropdown-header">Opções:</div>
-                                            <a class="dropdown-item" href="#">Editar</a>
-                                            <a class="dropdown-item" href="#">Excluir</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Adicionar Conteudo</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-block text-center">
-                                    <div data-label="40%" class="radial-bar radial-bar-40 radial-bar-lg radial-bar-danger">
-                                        <img src="../img/users/6.jpg" alt="User-Image">
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <h5 class="fw-700 mb-0">0</h5>
-                                            <p class="mb-0">Alunos</p>
-                                        </div>
-                                        <div class="col-6 border-left">
-                                            <h5 class="fw-700 mb-0">0</h5>
-                                            <p class="mb-0">Conteudo</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
+                        
+                        <form action="editarCurso.php" method="post" name="enviar_parametros" >
+                            <input type="hidden" id="id" name="id" value="" />            
+                        </form>
                     </div>
 
                 </div>
@@ -541,8 +407,9 @@ $objLogin->verificarLogado();
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    
     <script>
-        window.jQuery || document.write('<script src="src/js/vendor/jquery-3.3.1.min.js"><\/script>')
+        window.jQuery || document.write('<script src="../src/js/vendor/jquery-3.3.1.min.js"><\/script>')
     </script>
     <script src="../plugins/popper.js/dist/umd/popper.min.js"></script>
     <script src="../plugins/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -550,43 +417,16 @@ $objLogin->verificarLogado();
     <script src="../plugins/screenfull/dist/screenfull.js"></script>
     <script src="../plugins/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="../plugins/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
-    <script src="../plugins/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="../plugins/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
-    <script src="../plugins/jvectormap/jquery-jvectormap.min.js"></script>
-    <script src="../plugins/jvectormap/tests/assets/jquery-jvectormap-world-mill-en.js"></script>
-    <script src="../plugins/moment/moment.js"></script>
-    <script src="../plugins/tempusdominus-bootstrap-4/build/js/tempusdominus-bootstrap-4.min.js"></script>
-    <script src="../plugins/d3/dist/d3.min.js"></script>
-    <script src="../plugins/c3/c3.min.js"></script>
-    <script src="../js/tables.js"></script>
-    <script src="../js/widgets.js"></script>
-    <script src="../js/charts.js"></script>
     <script src="../dist/js/theme.min.js"></script>
-    <script src="../js/form-advanced.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
-    <script src="../js/form-components.js"></script>
-
-
-    <script>
-        $(document).ready(() => {
-            $("#body-2").hide();
-            $("#openCadastro").click(() => {
-                $("#body-1").hide();
-                $("#body-2").show();
-            });
-
-            $("#closeCadastro").click(() => {
-                $("#body-1").show();
-                $("#body-2").hide();
-            });
-
-            $("#data").mask('00/00/0000');
-
-            $('.html-editor').summernote({
-                height: 300,
-                tabsize: 2
-            });
-        });
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="../js/datatables.js"></script>
+    <script src="../src/js/curso.js"></script>
+    <script type='text/javascript'>
+        function atualizar(){
+            
+            const div = document.getElementsByClassName('cursos')[0];  
+            div.insertAdjacentHTML('beforeEnd', '<?php $objController->listarCursos();?>');
+        }
     </script>
 
 

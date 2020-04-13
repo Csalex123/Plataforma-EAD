@@ -1,10 +1,14 @@
 <?php
 include_once "../model/Login.class.php";
+include_once "../model/CrudCurso.class.php";
 include_once "../model/Controller.class.php";
 $controller = new Controller();
 
 $objLogin = new  Login();
 $objLogin->verificarLogado();
+$idCurso = $_POST['id'];
+$objCrud = new CrudCurso();
+$objCurso = $objCrud->consultarCursoId($idCurso);
 
 ?>
 <!doctype html>
@@ -52,12 +56,9 @@ $objLogin->verificarLogado();
                             <div class="col-lg-8">
                                 <div class="page-header-title">
                                     <i class="ik ik-plus-circle bg-blue"></i>
-                                    
                                     <button onclick="back()" type="button" class="btn btn-primary">Voltar</button><br><br>
-
-                                    
                                     <div class="d-inline">
-                                        <h5>Cadastro de Curso</h5>
+                                        <h5>Editar de Curso</h5>
 
                                     </div>
                                 </div>
@@ -70,18 +71,18 @@ $objLogin->verificarLogado();
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <form id="formulario-cursos-cadastrar">
+                                    <form id="formulario-cursos-editar">
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="">Nome da aula</label>
-                                                    <input type="text" id="txtNome" name="nome" class="form-control" placeholder="Nome">
+                                                    <input type="text" id="txtNome" name="nome" class="form-control" placeholder="Nome" value="<?php echo $objCurso->getNome();?>">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="input">Tag do curso</label>
-                                                    <input type="text" id="tags" name="tags" class="form-control" value="">
+                                                    <input type="text" id="tags" name="tags" class="form-control" value="<?php echo $objCurso->getHashtag();?>">
                                                 </div>
                                             </div>
 
@@ -102,7 +103,7 @@ $objLogin->verificarLogado();
                                                     <label>Anexe uma imagem para este curso</label>
                                                     <input type="file" id="txtImg" name="img" accept=".png, .jpg, .jpeg" class="file-upload-default" >
                                                     <div class="input-group col-xs-12">
-                                                        <input type="text"  class="form-control file-upload-info" disabled placeholder="Imagem">
+                                                        <input type="text" value="<?php echo $objCurso->getImg();?>" class="form-control file-upload-info" disabled placeholder="Imagem">
                                                         <span class="input-group-append">
                                                             <button class="file-upload-browse btn btn-primary" type="button">Selecionar</button>
                                                         </span>
@@ -113,14 +114,16 @@ $objLogin->verificarLogado();
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label for="">Descrição do Curso</label>
-                                                    <textarea id="txtDescricao" name="descricao" class="form-control" rows="6"></textarea>
+                                                    <textarea id="txtDescricao" name="descricao" class="form-control" rows="6"><?php echo $objCurso->getDescricao();?></textarea>
                                                 </div>
                                             </div>
-                                            <input type="hidden" name="metodo" value="cadastrar-curso">
+                                            <input type="hidden" name="img-temp" value="<?php echo $objCurso->getImg();?>">
+                                            <input type="hidden" name="metodo" value="editar-curso">
+                                            <input type="hidden" name="idCurso" value="<?php echo $objCurso->getId();?>">
                                             <input type="hidden" name="entidade" value="curso">
 
                                             <div class="col-md-12">
-                                                <button type="submit" class="btn btn-primary" style="float: right;">Cadastrar Treinamento</button>
+                                                <button type="submit" class="btn btn-primary" style="float: right;">Editar Treinamento</button>
                                             </div>
 
                                         </div>
@@ -145,6 +148,7 @@ $objLogin->verificarLogado();
 
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+ 
       <script>
         window.jQuery || document.write('<script src="../src/js/vendor/jquery-3.3.1.min.js"><\/script>')
     </script>
@@ -161,7 +165,11 @@ $objLogin->verificarLogado();
     <script src="../js/form-components.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script src="../src/js/curso.js"></script>
-   
+
+    <script>
+       
+       $('#selectProfessores').val("<?php echo $objCurso->getObjProfessor()->getId() ?>");
+    </script>
 
 </body>
 
