@@ -146,9 +146,8 @@ class CrudAluno extends Conexao{
                     $objAluno->setId($rs->id);
                     $objAluno->setNome($rs->nome);
                     $objAluno->setEmail($rs->email);
-                    $objAluno->setSenha($rs->senha);
                     $objAluno->setLoginAtivo($rs->loginAtivo);
-                    $objAluno->setBloqueado($rs->bloqueado);
+                   
 
                     $listaAlunos[]=$objAluno;
                 }

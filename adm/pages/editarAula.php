@@ -108,7 +108,7 @@ $objAula = $objCrud->consultarAulaId($idAula);
                                         <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Anexe uma imagem para esta aula</label>
-                                                    <input  type="file" id="txtImg" accept=".png, .jpg, .jpeg"  name="img" class="file-upload-default">
+                                                    <input  type="file" id="txtImg" accept=".png, .jpg, .jpeg, .svg"  name="img" class="file-upload-default">
                                                     <div class="input-group col-xs-12">
                                                         <input  type="text" value="<?php echo $objAula->getImg();?>" class="form-control file-upload-info" disabled placeholder="Imagem">
                                                         <span class="input-group-append">

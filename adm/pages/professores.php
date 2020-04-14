@@ -70,7 +70,7 @@ $objLogin->verificarLogado();
                                     <table id="scr-vrt-dt" class="table table-striped table-bordered nowrap">
                                         <thead>
                                             <tr>
-                                                <th class="nosort">Avatar</th>
+                                                
                                                     <th>Nome</th>
                                                     <th>Email</th>
                                                     <th>Status</th>

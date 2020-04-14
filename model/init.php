@@ -1,14 +1,22 @@
 <?php
+
+define('MYSQL_HOST', 'localhost');
+define('MYSQL_USER', 'root');
+define('MYSQL_PASSWORD', '');
+define('MYSQL_DB_NAME', 'berlim_ead');
+
+try {
+
+    function db_connect()
+    {
+        $PDO = new PDO('mysql:host=' . MYSQL_HOST . ';dbname=' . MYSQL_DB_NAME, MYSQL_USER, MYSQL_PASSWORD);
+
+        return $PDO;
+    }
+
+} catch (PDOException $e) {
+    echo 'Erro ao conectar com o MySQL: ' . $e->getMessage();
+}
  
-// constantes com as credenciais de acesso ao banco MySQL
-define('DB_HOST', 'localhost');
-define('DB_USER', 'root');
-define('DB_PASS', '');
-define('DB_NAME', 'ead_berlim');
- 
-// habilita todas as exibições de erros
-ini_set('display_errors', true);
-error_reporting(E_ALL);
- 
-// inclui o arquivo de funçõees
+
 require_once 'functions.php';

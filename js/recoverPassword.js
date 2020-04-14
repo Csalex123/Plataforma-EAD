@@ -1,10 +1,13 @@
 $(document).ready(function(){
     $(".msg-2").hide();   
     $('.loader-div').hide();
+    $('.msg-recuperacao').show();
+    
     
     $("#form-password").submit(function (event) {
         event.preventDefault();   
         $('.loader-div').show();
+        $('.msg-recuperacao').hide();
         $(".recover").prop('disabled', true);
 
         email = $("#email-2").val();
@@ -13,14 +16,11 @@ $(document).ready(function(){
         $.post("../curso/model/recoverPassword.php", {email: email}, function(retorno) {
              if(retorno){
                 $('.loader-div').hide();
-                $(".msg-2").show();   
-                $(".msg-2").css("color","green");
-                $(".msg-2").html("Uma nova senha foi enviada ao seu e-mail.");
+                $(".msg-2").show().html("Uma nova senha foi enviada ao seu e-mail.").css("color","green");   
             }else{
+                $('.msg-recuperacao').show();
                 $('.loader-div').hide();
-                $(".msg-2").show();
-                $(".msg-2").css("color","red");
-                $(".msg-2").html("E-mail inválido.");
+                $(".msg-2").show().html("E-mail inválido.").css("color","red");
                 $(".recover").prop('disabled', false);
             }
         });

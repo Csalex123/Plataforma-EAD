@@ -186,6 +186,41 @@ class CrudAula extends Conexao{
 
     }
 
+    public function listarAula(){
+	
+      try {
+        $conn = $this->conectar();
+        $sql = "SELECT * FROM aula";
+        $stmt = $conn->prepare($sql);
+        $listaAulas = array();
+              
+          if ($stmt->execute()) {
+             
+              while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {
+                $objAula = new Aula();
+                $objAula->setId($rs->id);
+                $objAula->setTitulo($rs->titulo);
+                $objAula->setData($rs->dataAula);
+                $objAula->setHora($rs->hora);
+                $objAula->setImg($rs->img);
+                $objAula->setDescricao($rs->descricao);
+                $objAula->setLink($rs->link);
+                $listaAulas[]=$objAula;
+              }
+          } else {
+              echo "Erro: Não foi possível recuperar os dados do banco de dados";
+          }
+
+          return $listaAulas;
+
+      } catch(PDOException $e) {
+        
+        echo 'Error: ' . $e->getMessage();
+        return false;
+      }
+
+    }
+
    
    
 

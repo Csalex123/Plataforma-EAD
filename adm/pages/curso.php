@@ -26,11 +26,15 @@ $objLogin->verificarLogado();
     <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="../plugins/ionicons/dist/css/ionicons.min.css">
     <link rel="stylesheet" href="../plugins/icon-kit/dist/css/iconkit.min.css">
-    <link rel="stylesheet" href="../plugins/fullcalendar/dist/fullcalendar.min.css">
+    <link rel="stylesheet" href="i../plugins/fullcalendar/dist/fullcalendar.min.css">
     <link rel="stylesheet" href="../plugins/perfect-scrollbar/css/perfect-scrollbar.css">
     <link rel="stylesheet" href="../plugins/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="../dist/css/theme.css">
     <script src="../src/js/vendor/modernizr-2.8.3.min.js"></script>
+    <style>
+       
+    </style>
+    
 
 </head>
 
@@ -116,6 +120,50 @@ $objLogin->verificarLogado();
                 </div>
             </div>
         </div>
+    </div>  <div class="modal fade edit-layout-modal" id="listarAlunos" tabindex="-1" role="dialog" aria-labelledby="listarAlunosLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="tituloCursoAlunos"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card table-card">
+                                <div class="card-header">
+                                <input class="form-control" id="pesquisa" type="text" placeholder="Pesquisar..">       
+                                     
+                                </div>
+                                <div class="card-block">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover" id="tabCursoAlunos" >
+                                            <thead>
+                                                <tr> 
+                                                    
+                                                    <th>Nome</th>
+                                                    <th>Email</th>
+                                                    <th>Status</th>
+                                                    
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tbAlunosCursos">
+                
+                                            </tbody>
+                                                            
+                                        </table>
+                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     
@@ -128,7 +176,7 @@ $objLogin->verificarLogado();
     <script src="../plugins/screenfull/dist/screenfull.js"></script>
     <script src="../plugins/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="../plugins/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
-    <script src="../dist/js/theme.min.js"></script>
+    <script src="../dist/js/theme.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script src="../js/datatables.js"></script>
     
@@ -164,6 +212,23 @@ $objLogin->verificarLogado();
                 document.getElementById('tituloCursoAula').innerHTML = $("#nomeCurso"+id).html() + " - Lista de aulas";
                 document.getElementById('listarAulasCurso').innerHTML = " ";
                 document.getElementById('listarAulasCurso').innerHTML = data;
+
+                    
+            });
+
+           
+        }
+
+        function listarAlunosCurso(id){
+            document.getElementById('fullwindowModal').setAttribute('data-id', id);
+            $.post("../model/processar.php",{
+                id:id,
+                metodo:'listarAlunos',
+                entidade:'curso'
+            }, function(data){
+                document.getElementById('tituloCursoAlunos').innerHTML = $("#nomeCurso"+id).html() + " - Alunos";
+                document.getElementById('tbAlunosCursos').innerHTML = " ";
+                document.getElementById('tbAlunosCursos').innerHTML = data;
 
                     
             });
@@ -226,6 +291,14 @@ $objLogin->verificarLogado();
                 }
             })
         }
+        $(document).ready(function(){
+            $("#pesquisa").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#tbAlunosCursos tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
     </script>
 
 

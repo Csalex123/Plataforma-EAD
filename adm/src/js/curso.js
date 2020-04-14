@@ -121,7 +121,7 @@ $(document).ready(function(){
                 contentType: false,
                 processData: false
             }).done(function(res){
-                
+                alert(res);
                 if(res == "1"){
                     
                     Swal.fire({

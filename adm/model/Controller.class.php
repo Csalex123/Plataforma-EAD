@@ -1,6 +1,7 @@
 <?php
 include_once "CrudProfessor.class.php";
 include_once "CrudCurso.class.php";
+include_once "CrudCursoAlunos.class.php";
 include_once "CrudAluno.class.php";
 include_once "CrudAula.class.php";
 include_once "Professor.class.php";
@@ -25,7 +26,7 @@ class Controller{
       foreach ($retornoLista as $obj) {
         echo '<tr id="'.$obj->getId().'">';
                                                
-            echo '<td><img src="../img/users/2.jpg" class="table-user-thumb" alt=""></td>';
+           // echo '<td><img src="../img/users/2.jpg" class="table-user-thumb" alt=""></td>';
             echo '<td>'.$obj->getNome().'</td>';
             echo '<td>'.$obj->getEmail().'</td>';
             if($obj->getLoginAtivo()== 0){
@@ -70,13 +71,14 @@ class Controller{
         $objCrud = new CrudCurso();
         $retornoLista = $objCrud->listarCursos();
         $objCrudAula = new CrudAula();
+        $objCrudCursoAlunos = new CrudCursoAlunos();
         foreach ($retornoLista as $obj) {
             
                 
             echo'<div class="col-xl-3 col-md-6" id="'.$obj->getId().'">';
-            echo'    <div class="card sale-card">';
-            echo'        <div class="card-header">';
-            echo'            <h3 id="nomeCurso'.$obj->getId().'">'.$obj->getNome().'</h3>';
+            echo'    <div class="card sale-card cursoCards" >';
+            echo'        <div class="card-header" style="heigth:50px;">';
+            echo'            <h3 style="font-size:12px;  max-width: 25ch; font-weight: 800; overflow: hidden;text-overflow: ellipsis;white-space: nowrap;" id="nomeCurso'.$obj->getId().'">'.$obj->getNome().'</h3>';
             echo'            <div class="dropdown no-arrow" style="top:20px; right: 10px; position: absolute;">';
             echo'                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" style="color:black;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
             echo'                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>';
@@ -91,20 +93,20 @@ class Controller{
             echo'            </div>';
             echo'        </div>';
             echo'        <div class="card-block text-center">';
-            echo'            <div data-label="" class="radial-bar radial-bar-40 radial-bar-lg radial-bar-danger">';
-            echo'                <img id="imagemCurso'.$obj->getId().'" src="../img/cursos/'.$obj->getImg().'" alt="curso">';
+            echo'            <div data-label="" class="radial-bar  radial-bar-lg radial-bar-danger">';
+            echo'                <img id="imagemCurso'.$obj->getId().'" src="../img/cursos/'.$obj->getImg().'" alt="curso" style="width: 120px;height: 120px;margin-left: -9px;margin-top: -9px;">';
             echo'            </div>';
             echo'            <div class="row">';
             echo'                <div class="col-6">';
-            echo'                    <h5 class="fw-700 mb-0">0</h5>';
-            echo'                    <p class="mb-0"><a href="#listarAlunos" data-toggle="modal" data-target="#listarAlunos">Alunos</a></p>';
+            echo'                    <h5 class="fw-700 mb-0">'.count($objCrudCursoAlunos->listarAlunosPorCurso($obj->getId())).'</h5>';
+            echo'                    <p class="mb-0"><a href="#listarAlunos" onclick="listarAlunosCurso('.$obj->getId().')" data-toggle="modal" data-target="#listarAlunos"><b>Alunos</b></a></p>';
             echo'                </div>';
             echo'                <div class="col-6 border-left">';
                                      
                                    
                                       
             echo'                    <h5 class="fw-700 mb-0" id="qtdeAulas'.$obj->getId().'">'.count($objCrudAula->listarAulas($obj->getId())).'</h5>';
-            echo'                    <p class="mb-0"><a href="#fullwindowModal" onclick="listarAulas('.$obj->getId().')" data-toggle="modal" data-target="#fullwindowModal">Aulas</a></p></p>';
+            echo'                    <p class="mb-0"><a href="#fullwindowModal" onclick="listarAulas('.$obj->getId().')" data-toggle="modal" data-target="#fullwindowModal"><b>Aulas</b></a></p></p>';
             echo'                </div>';
             echo'            </div>';
             echo'        </div>';

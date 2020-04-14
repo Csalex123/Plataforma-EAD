@@ -22,9 +22,10 @@ $paginaLink = basename($_SERVER['SCRIPT_NAME']);
                                 <div <?php if($paginaLink == "professores.php") {echo 'class="nav-item active"';}else{echo 'class="nav-item"';} ?>>
                                     <a href="../pages/professores.php"><i class="ik ik-user"></i><span>Professores</span></a>
                                 </div>
-                                <div <?php if($paginaLink == "alunos.php") {echo 'class="nav-item active"';}else{echo 'class="nav-item"';} ?>>
+                                <!--
+                                <div>
                                     <a href="../pages/alunos.php"><i class="ik ik-users"></i><span>Alunos</span></a>
-                                </div>
+                                </div>-->
                                 <div <?php if($paginaLink == "curso.php") {echo 'class="nav-item active"';}else{echo 'class="nav-item"';} ?>>
                                     <a href="../pages/curso.php"><i class="ik ik-clipboard"></i><span>Cursos</span></a>
                                 </div>

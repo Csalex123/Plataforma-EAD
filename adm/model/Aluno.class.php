@@ -52,7 +52,7 @@ class Aluno{
 	}
 
 
-	public function loginAtivo(){
+	public function getLoginAtivo(){
 		return $this->loginAtivo;
 	}
 

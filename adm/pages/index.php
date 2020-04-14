@@ -35,7 +35,7 @@ $objLogin->verificarLogado();
         <script src="../src/js/vendor/modernizr-2.8.3.min.js"></script>
     </head>
 
-    <body>
+    <body onload="atualizarDashBoard();">
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -54,7 +54,7 @@ $objLogin->verificarLogado();
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="state">
                                                 <h6>Alunos</h6>
-                                                <h2>400</h2>
+                                                <h2 id="dashAlunos">0</h2>
                                             </div>
                                             <div class="icon">
                                                 <i class="ik ik-users"></i>
@@ -71,7 +71,7 @@ $objLogin->verificarLogado();
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="state">
                                                 <h6>Cursos</h6>
-                                                <h2>10</h2>
+                                                <h2 id="dashCursos">0</h2>
                                             </div>
                                             <div class="icon">
                                                 <i class="ik ik-clipboard"></i>
@@ -87,7 +87,7 @@ $objLogin->verificarLogado();
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="state">
                                                 <h6>Aulas</h6>
-                                                <h2>30</h2>
+                                                <h2 id="dashAula">0</h2>
                                             </div>
                                             <div class="icon">
                                                 <i class="ik ik-clipboard"></i>
@@ -103,7 +103,7 @@ $objLogin->verificarLogado();
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="state">
                                                 <h6>Professores</h6>
-                                                <h2>5</h2>
+                                                <h2 id="dashProfessores">5</h2>
                                             </div>
                                             <div class="icon">
                                                 <i class="ik ik-users"></i>
@@ -176,7 +176,22 @@ $objLogin->verificarLogado();
         <script src="../cursor.js"></script>
 
       
-       
+       <script>
+           function atualizarDashBoard(){
+               $.post("../model/processar.php",{
+                        
+                        metodo:'atualizar',
+                        entidade:'dashboard'
+                }, function(data){
+                    var dash = data.split(",");
+                    document.getElementById('dashAlunos').innerHTML = dash[0];
+                    document.getElementById('dashCursos').innerHTML = dash[1];
+                    document.getElementById('dashAulas').innerHTML = dash[2];
+                    document.getElementById('dashProfessores').innerHTML = dash[3];
+                    
+                });
+           }
+       </script>
         
         
 

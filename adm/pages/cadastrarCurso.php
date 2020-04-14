@@ -100,7 +100,7 @@ $objLogin->verificarLogado();
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Anexe uma imagem para este curso</label>
-                                                    <input type="file" id="txtImg" name="img" accept=".png, .jpg, .jpeg" class="file-upload-default" >
+                                                    <input type="file" id="txtImg" name="img" accept=".png, .jpg, .jpeg, .svg" class="file-upload-default" >
                                                     <div class="input-group col-xs-12">
                                                         <input type="text"  class="form-control file-upload-info" disabled placeholder="Imagem">
                                                         <span class="input-group-append">

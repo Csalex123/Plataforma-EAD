@@ -1,15 +1,21 @@
 <?php 
 include_once "Login.class.php";
 include_once "CrudCurso.class.php";
+include_once "CrudCursoAlunos.class.php";
 include_once "CrudProfessor.class.php";
 include_once "CrudAula.class.php";
+include_once "CrudAluno.class.php";
 include_once "Curso.class.php";
+include_once "CursoAlunos.class.php";
 include_once "Professor.class.php";
 include_once "Aula.class.php";
+include_once "Aluno.class.php";
 
 $objLogin = new Login();
 $objCrudCurso = new CrudCurso();
+$objCrudCursoAlunos = new CrudCursoAlunos();
 $objCrudAula = new CrudAula();
+$objCrudAluno = new CrudAluno();
 $objCrudProfessor = new CrudProfessor();
 $objCurso = new Curso();
 
@@ -60,7 +66,7 @@ switch($entidade){
               
                   // Converte a extensão para minúsculo
                   $extensao = strtolower ( $extensao );
-                  if ( strstr ( '.jpg;.jpeg;.png', $extensao ) ) {
+                  if ( strstr ( '.jpg;.jpeg;.png;.svg', $extensao ) ) {
                       // Cria um nome único para esta imagem
                       // Evita que duplique as imagens no servidor.
                       // Evita nomes com acentos, espaços e caracteres não alfanuméricos
@@ -127,12 +133,14 @@ switch($entidade){
               
                     // Converte a extensão para minúsculo
                     $extensao = strtolower ( $extensao );
-                    if ( strstr ( '.jpg;.jpeg;.png', $extensao ) ) {
+                    if ( strstr ( '.jpg;.jpeg;.png;.svg', $extensao ) ) {
                         // Cria um nome único para esta imagem
                         // Evita que duplique as imagens no servidor.
                         // Evita nomes com acentos, espaços e caracteres não alfanuméricos
                         $novoNome = uniqid ( rand ()) . '.' . $extensao;
-                                        
+                        if($imgTemp == ""){
+                          $imgTemp = "naotemimagem.png";
+                        }              
                         // Concatena a pasta com o nome
                         $destino = '../img/cursos/' . $novoNome;
                         $remover = '../img/cursos/' . $imgTemp;
@@ -141,8 +149,8 @@ switch($entidade){
                         //$retorno3 = $objCrudCurso->editarCurso($id,$nome,$novoNome,$hashtag,$descricao,$idProfessor);
                         if( file_exists( $remover ) ){
                           unlink( $remover );
-                          $retorno3 = $objCrudCurso->editarCurso($id,$nome,$novoNome,$hashtag,$descricao,$idProfessor);
-                          if($retorno3 == true){
+                          $retorno4 = $objCrudCurso->editarCurso($id,$nome,$novoNome,$hashtag,$descricao,$idProfessor);
+                          if($retorno4 == true){
                               // tenta mover o arquivo para o destino
                               if (!@move_uploaded_file($arquivo_tmp, $destino)){
                                   echo "3";
@@ -155,18 +163,18 @@ switch($entidade){
                               echo "2";
                           }
                         }else{
-                          $retorno3 = $objCrudCurso->editarCurso($id,$nome,$novoNome,$hashtag,$descricao,$idProfessor);
-                          if($retorno3 == true){
+                          $retorno4 = $objCrudCurso->editarCurso($id,$nome,$novoNome,$hashtag,$descricao,$idProfessor);
+                          if($retorno4 == true){
                               // tenta mover o arquivo para o destino
                               if (!@move_uploaded_file($arquivo_tmp, $destino)){
-                                  echo '3';
+                                  echo "3";
       
                               }
-                              echo '1';
+                              echo "1";
                               
                               
                           }else{
-                              echo '2';
+                              echo "2";
                           }
 
                         }
@@ -195,6 +203,28 @@ switch($entidade){
               echo "2";
             }
             break;
+          case 'listarAlunos':
+            $id = $_POST['id'];
+            $retornoLista = $objCrudCursoAlunos->listarAlunosPorCurso($id);
+            foreach ($retornoLista as $obj) {
+              echo '<tr id="'.$obj->getId().'">';
+                                                     
+                  
+                  echo '<td>'.$obj->getObjAluno()->getNome().'</td>';
+                  echo '<td>'.$obj->getObjAluno()->getEmail().'</td>';
+                  if($obj->getObjAluno()->getLoginAtivo()== 0){
+                      echo '<td><div class="p-status bg-red"></div></td>';
+                  }else{
+                      echo '<td><div class="p-status bg-green"></div></td>';
+                  }
+                              
+                  echo '</td>';
+               echo '</tr>';
+      
+      
+            }
+            break;
+
 
 
         }
@@ -259,7 +289,7 @@ switch($entidade){
           
               // Converte a extensão para minúsculo
               $extensao = strtolower ( $extensao );
-              if ( strstr ( '.jpg;.jpeg;.png', $extensao ) ) {
+              if ( strstr ( '.jpg;.jpeg;.png;.svg', $extensao ) ) {
                   // Cria um nome único para esta imagem
                   // Evita que duplique as imagens no servidor.
                   // Evita nomes com acentos, espaços e caracteres não alfanuméricos
@@ -380,11 +410,14 @@ switch($entidade){
           
                 // Converte a extensão para minúsculo
                 $extensao = strtolower ( $extensao );
-                if ( strstr ( '.jpg;.jpeg;.png', $extensao ) ) {
+                if ( strstr ( '.jpg;.jpeg;.png;.svg', $extensao ) ) {
                     // Cria um nome único para esta imagem
                     // Evita que duplique as imagens no servidor.
                     // Evita nomes com acentos, espaços e caracteres não alfanuméricos
                     $novoNome = uniqid ( rand ()) . '.' . $extensao;
+                    if($imgTemp == ""){
+                      $imgTemp = "naotemimagem.png";
+                    }  
                                     
                     // Concatena a pasta com o nome
                     $destino = '../img/aulas/' . $novoNome;
@@ -439,6 +472,20 @@ switch($entidade){
 
 
       }
+      break;
+    case 'dashboard':
+      switch($metodo){
+        case 'atualizar':
+          $dados = array();
+          $dados[] = count($objCrudAluno->listarAlunos());
+          $dados[] = count($objCrudCurso->listarCursos());
+          $dados[] = count($objCrudAula->listarAula());
+          $dados[] = count($objCrudProfessor->listarProfessores());
+          echo implode(",", $dados);     
+          break;
+      }
+     
+
 
 }
 
