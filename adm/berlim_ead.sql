@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 13-Abr-2020 às 04:45
+-- Tempo de geração: 14-Abr-2020 às 02:07
 -- Versão do servidor: 10.4.11-MariaDB
 -- versão do PHP: 7.4.3
 
@@ -47,6 +47,23 @@ INSERT INTO `administrador` (`id`, `nome`, `email`, `senha`, `loginAtivo`) VALUE
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `aula`
+--
+
+CREATE TABLE `aula` (
+  `id` int(11) NOT NULL,
+  `titulo` varchar(60) NOT NULL,
+  `img` varchar(60) DEFAULT NULL,
+  `dataAula` varchar(20) NOT NULL,
+  `hora` varchar(20) NOT NULL,
+  `link` varchar(150) NOT NULL,
+  `descricao` text NOT NULL,
+  `idCurso` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `curso`
 --
 
@@ -64,7 +81,8 @@ CREATE TABLE `curso` (
 --
 
 INSERT INTO `curso` (`id`, `nome`, `img`, `hashtag`, `descricao`, `idProfessor`) VALUES
-(1, 'curso12a', '20113187485e93d2183fd33.jpg', 'klk,lkl,dss', 'testesd', 1);
+(1, 'curso12a', '20113187485e93d2183fd33.jpg', 'klk,lkl,dss', 'testesd', 1),
+(2, 'curso2', '2002732165e94f90c54c9d.jpg', 'asa,as,aas', 'asasas', 1);
 
 -- --------------------------------------------------------
 
@@ -99,6 +117,13 @@ ALTER TABLE `administrador`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Índices para tabela `aula`
+--
+ALTER TABLE `aula`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idCurso` (`idCurso`);
+
+--
 -- Índices para tabela `curso`
 --
 ALTER TABLE `curso`
@@ -122,10 +147,16 @@ ALTER TABLE `administrador`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT de tabela `aula`
+--
+ALTER TABLE `aula`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de tabela `curso`
 --
 ALTER TABLE `curso`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `professor`
@@ -136,6 +167,12 @@ ALTER TABLE `professor`
 --
 -- Restrições para despejos de tabelas
 --
+
+--
+-- Limitadores para a tabela `aula`
+--
+ALTER TABLE `aula`
+  ADD CONSTRAINT `aula_ibfk_1` FOREIGN KEY (`idCurso`) REFERENCES `curso` (`id`);
 
 --
 -- Limitadores para a tabela `curso`

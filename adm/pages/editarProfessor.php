@@ -89,7 +89,7 @@ $professor = $objCrud->consultarProfessorId($id);
 
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <button type="submit" class="btn btn-primary">Editar Professor</button>
+                                                    <button type="submit" class="btn btn-primary">Salvar Alterações</button>
                                                 </div>
                                             </div>
 

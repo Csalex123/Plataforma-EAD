@@ -28,7 +28,7 @@ $objLogin->verificarLogado();
     <link rel="stylesheet" href="../plugins/icon-kit/dist/css/iconkit.min.css">
     <link rel="stylesheet" href="../plugins/fullcalendar/dist/fullcalendar.min.css">
     <link rel="stylesheet" href="../plugins/perfect-scrollbar/css/perfect-scrollbar.css">
-    <link rel="stylesheet" href="../plugins/tempusdominus-bootstrap-4/build/css/tempusdominus-bootstrap-4.min.css">
+    <link rel="stylesheet" href="../plugins/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="../dist/css/theme.css">
     <script src="../src/js/vendor/modernizr-2.8.3.min.js"></script>
 
@@ -79,6 +79,13 @@ $objLogin->verificarLogado();
                         <form action="editarCurso.php" method="post" name="enviar_parametros" >
                             <input type="hidden" id="id" name="id" value="" />            
                         </form>
+                        <form action="cadastrarAula.php" method="post" name="enviar_parametros_aula" >
+                            <input type="hidden" id="idCurso" name="id" value="" />            
+                        </form>
+                        <form action="editarAula.php" method="post" name="enviar_dadosAulas_editar" >
+                            <input type="hidden" id="idAula" name="idAula" value="" />            
+                        </form>
+                        
                     </div>
 
                 </div>
@@ -92,320 +99,24 @@ $objLogin->verificarLogado();
 
         </div>
     </div>
-
-    <div class="modal fade edit-layout-modal" id="editLayoutItem" tabindex="-1" role="dialog" aria-labelledby="editLayoutItemLabel" aria-hidden="true">
+    <div class="modal fade full-window-modal"  id="fullwindowModal" tabindex="-1" role="dialog" aria-labelledby="fullwindowModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editLayoutItemLabel">Curso1 - Aulas</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                </div>
-
-                <div class="modal-body" id="body-1">
-                    <div class="col-xl-12 col-md-12">
-                        <button id="openCadastro" type="button" class="btn btn-primary">Cadatrar uma nova aula</button><br><br>
-
-                        <div class="card table-card">
-                            <div class="card-block">
-
-                                <div class="table-responsive">
-                                    <table class="table  mb-0">
-                                        <thead>
-                                            <tr>
-                                                <th>Nome</th>
-                                                <th>Data da aula</th>
-                                                <th>Status</th>
-                                                <th></th>
-                                                <th>Ação</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Fulano</td>
-                                                <td>00/00/000</td>
-                                                <td>
-                                                    <div class="p-status bg-green"></div>
-                                                </td>
-                                                <td></td>
-                                                <td>
-                                                    <div class="custom-control custom-checkbox pl-1 align-self-center">
-                                                        <label class="custom-control custom-checkbox mb-0">
-                                                            <input type="checkbox" class="custom-control-input">
-                                                            <span class="custom-control-label"></span>
-                                                        </label>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Fulano</td>
-                                                <td>00/00/000</td>
-                                                <td>
-                                                    <div class="p-status bg-red"></div>
-                                                </td>
-                                                <td>fulano@emmail.com</td>
-                                                <td>
-                                                    <div class="custom-control custom-checkbox pl-1 align-self-center">
-                                                        <label class="custom-control custom-checkbox mb-0">
-                                                            <input type="checkbox" class="custom-control-input">
-                                                            <span class="custom-control-label"></span>
-                                                        </label>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Fulano</td>
-                                                <td>00/00/000</td>
-                                                <td>
-                                                    <div class="p-status bg-red"></div>
-                                                </td>
-                                                <td>fulano@emmail.com</td>
-                                                <td>
-                                                    <div class="custom-control custom-checkbox pl-1 align-self-center">
-                                                        <label class="custom-control custom-checkbox mb-0">
-                                                            <input type="checkbox" class="custom-control-input">
-                                                            <span class="custom-control-label"></span>
-                                                        </label>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Fulano</td>
-                                                <td>00/00/000</td>
-                                                <td>
-                                                    <div class="p-status bg-red"></div>
-                                                </td>
-                                                <td>fulano@emmail.com</td>
-                                                <td>
-                                                    <div class="custom-control custom-checkbox pl-1 align-self-center">
-                                                        <label class="custom-control custom-checkbox mb-0">
-                                                            <input type="checkbox" class="custom-control-input">
-                                                            <span class="custom-control-label"></span>
-                                                        </label>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Fulano</td>
-                                                <td>00/00/000</td>
-                                                <td>
-                                                    <div class="p-status bg-red"></div>
-                                                </td>
-                                                <td>fulano@emmail.com</td>
-                                                <td>
-                                                    <div class="custom-control custom-checkbox pl-1 align-self-center">
-                                                        <label class="custom-control custom-checkbox mb-0">
-                                                            <input type="checkbox" class="custom-control-input">
-                                                            <span class="custom-control-label"></span>
-                                                        </label>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="modal-body" id="body-2">
-                    <div class="col-xl-12 col-md-12">
-                        <button id="closeCadastro" type="button" class="btn btn-primary">Voltar</button><br><br>
-
-                        <div class="card">
-                            <div class="card-body">
-
-                                <form id="formulario-aulas">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="">Título da aula</label>
-                                                <input type="text" required class="form-control" placeholder="Nome">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-
-                                            <div class="form-group">
-                                                <label for="input">Data da aula</label>
-                                                <input type="text" required id="data" class="form-control" placeholder="00/00/0000">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label for="input">Hora da Aula</label>
-                                                <input type="text" required class="form-control" placeholder="Exemplo: 20h">
-                                            </div>
-                                        </div>
-
-
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label for="">Descrição da aula</label>
-                                                <textarea required class="html-editor form-control" rows="6"></textarea>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="">Link do Iframe do vídeo</label>
-                                                <textarea required class="html-editor form-control" rows="4"></textarea>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Anexe uma imagem para esta aula</label>
-                                                    <input required type="file" name="img[]" class="file-upload-default">
-                                                    <div class="input-group col-xs-12">
-                                                        <input required type="text" class="form-control file-upload-info" disabled placeholder="Imagem">
-                                                        <span class="input-group-append">
-                                                            <button class="file-upload-browse btn btn-primary" type="button">Selecionar</button>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        <div class="col-md-12">
-                                            <button type="submit" class="btn btn-primary" style="float: right;">Enviar formulário</button>
-                                        </div>
-
-                                    </div>
-                                </form>
-
-
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade edit-layout-modal" id="listarAlunos" tabindex="-1" role="dialog" aria-labelledby="listarAlunosLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editLayoutItemLabel">Curso - Alunos</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h5 class="modal-title" id="tituloCursoAula"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
-                    <div class="col-xl-12 col-md-12">
-                        <div class="card table-card">
-
-                            <div class="card-block">
-                                <div class="table-responsive">
-                                    <table class="table  mb-0">
-                                        <thead>
-                                            <tr>
-                                                <th>Nome</th>
-                                                <th>Data de nascimento</th>
-                                                <th>Status</th>
-                                                <th>Email</th>
-                                                <th>Ação</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Fulano</td>
-                                                <td>00/00/000</td>
-                                                <td>
-                                                    <div class="p-status bg-red"></div>
-                                                </td>
-                                                <td>fulano@emmail.com</td>
-                                                <td>
-                                                    <div class="custom-control custom-checkbox pl-1 align-self-center">
-                                                        <label class="custom-control custom-checkbox mb-0">
-                                                            <input type="checkbox" class="custom-control-input">
-                                                            <span class="custom-control-label"></span>
-                                                        </label>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Fulano</td>
-                                                <td>00/00/000</td>
-                                                <td>
-                                                    <div class="p-status bg-red"></div>
-                                                </td>
-                                                <td>fulano@emmail.com</td>
-                                                <td>
-                                                    <div class="custom-control custom-checkbox pl-1 align-self-center">
-                                                        <label class="custom-control custom-checkbox mb-0">
-                                                            <input type="checkbox" class="custom-control-input">
-                                                            <span class="custom-control-label"></span>
-                                                        </label>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Fulano</td>
-                                                <td>00/00/000</td>
-                                                <td>
-                                                    <div class="p-status bg-red"></div>
-                                                </td>
-                                                <td>fulano@emmail.com</td>
-                                                <td>
-                                                    <div class="custom-control custom-checkbox pl-1 align-self-center">
-                                                        <label class="custom-control custom-checkbox mb-0">
-                                                            <input type="checkbox" class="custom-control-input">
-                                                            <span class="custom-control-label"></span>
-                                                        </label>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Fulano</td>
-                                                <td>00/00/000</td>
-                                                <td>
-                                                    <div class="p-status bg-red"></div>
-                                                </td>
-                                                <td>fulano@emmail.com</td>
-                                                <td>
-                                                    <div class="custom-control custom-checkbox pl-1 align-self-center">
-                                                        <label class="custom-control custom-checkbox mb-0">
-                                                            <input type="checkbox" class="custom-control-input">
-                                                            <span class="custom-control-label"></span>
-                                                        </label>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Fulano</td>
-                                                <td>00/00/000</td>
-                                                <td>
-                                                    <div class="p-status bg-red"></div>
-                                                </td>
-                                                <td>fulano@emmail.com</td>
-                                                <td>
-                                                    <div class="custom-control custom-checkbox pl-1 align-self-center">
-                                                        <label class="custom-control custom-checkbox mb-0">
-                                                            <input type="checkbox" class="custom-control-input">
-                                                            <span class="custom-control-label"></span>
-                                                        </label>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
+                    <div class="row  aulas"  id="listarAulasCurso"></div>
+                                    
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    
                 </div>
             </div>
         </div>
     </div>
-
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     
     <script>
@@ -420,12 +131,100 @@ $objLogin->verificarLogado();
     <script src="../dist/js/theme.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script src="../js/datatables.js"></script>
+    
     <script src="../src/js/curso.js"></script>
     <script type='text/javascript'>
         function atualizar(){
             
             const div = document.getElementsByClassName('cursos')[0];  
             div.insertAdjacentHTML('beforeEnd', '<?php $objController->listarCursos();?>');
+        }
+
+        function addAula(id){
+           
+            document.getElementById('idCurso').value = id;
+
+            document.enviar_parametros_aula.submit();
+        }
+
+        function editarAula(id){
+            
+            document.getElementById('idAula').value = id;
+
+            document.enviar_dadosAulas_editar.submit();
+        }
+
+        function listarAulas(id){
+            document.getElementById('fullwindowModal').setAttribute('data-id', id);
+            $.post("../model/processar.php",{
+                id:id,
+                metodo:'listar',
+                entidade:'aula'
+            }, function(data){
+                document.getElementById('tituloCursoAula').innerHTML = $("#nomeCurso"+id).html() + " - Lista de aulas";
+                document.getElementById('listarAulasCurso').innerHTML = " ";
+                document.getElementById('listarAulasCurso').innerHTML = data;
+
+                    
+            });
+
+           
+        }
+
+        function excluirAula(id){
+                     
+    
+            Swal.fire({
+                title: 'Você tem certeza?',
+                text: "Você não poderá reverter isso!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sim, exclua-o!',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                
+                var img = document.getElementById('divImgAula'+id).getAttribute("data-img");
+                if (result.value) {
+                    $.post("../model/processar.php",{
+                                id:id,
+                                img:img,
+                                metodo:'excluir-aula',
+                                entidade:'aula'
+                        }, function(data){
+                                
+                                if(data == "1"){
+                                    Swal.fire({
+                                        title: '',
+                                        text: 'Aula exluida com sucesso.',
+                                        icon: 'success',
+                                        confirmButtonText: 'Fechar'
+                                    }).then((result) => {
+                                        if (result.value) {
+                                            document.getElementsByClassName('aulas')[0].removeChild(document.getElementById("aula"+id));
+                                            idCurso = document.getElementById('fullwindowModal').getAttribute("data-id");
+                                            var qtdAulas = $('#qtdeAulas'+idCurso).html();               
+                                            $('#qtdeAulas'+idCurso).html(qtdAulas-1);
+                                            
+                                           
+                                        }
+                                    });
+                                
+                                
+                                }else if(data == "2"){
+                                    Swal.fire({
+                                        title: 'Erro ao excluir a aula.',
+                                        text: data,
+                                        icon: 'error',
+                                        confirmButtonText: 'Fechar'
+                                    }); 
+                                }
+                            
+                        });
+                
+                }
+            })
         }
     </script>
 

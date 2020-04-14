@@ -2,11 +2,14 @@
 include_once "Login.class.php";
 include_once "CrudCurso.class.php";
 include_once "CrudProfessor.class.php";
+include_once "CrudAula.class.php";
 include_once "Curso.class.php";
 include_once "Professor.class.php";
+include_once "Aula.class.php";
 
 $objLogin = new Login();
 $objCrudCurso = new CrudCurso();
+$objCrudAula = new CrudAula();
 $objCrudProfessor = new CrudProfessor();
 $objCurso = new Curso();
 
@@ -195,6 +198,7 @@ switch($entidade){
 
 
         }
+        break;
     case 'professor':
       switch($metodo){
         case 'cadastrar':
@@ -234,6 +238,210 @@ switch($entidade){
         
 
       }
+      break;
+    case 'aula':
+      switch($metodo){
+        case 'cadastrar-aula':
+          $titulo = $_POST['titulo'];
+          $data = $_POST['data'];
+          $hora = $_POST['hora'];
+          $descricao = $_POST['descricao'];
+          $link = $_POST['link'];
+          $img = $_FILES["img"]["tmp_name"];
+          $idCurso = $_POST['idCurso'];
+
+            if ( isset( $_FILES[ 'img' ][ 'name' ] ) && $_FILES[ 'img' ][ 'error' ] == 0 ) {
+              $arquivo_tmp = $_FILES[ 'img' ][ 'tmp_name' ];
+              $nomeImg = $_FILES[ 'img' ][ 'name' ];
+          
+              // Pega a extensão
+              $extensao = pathinfo ( $nomeImg, PATHINFO_EXTENSION );
+          
+              // Converte a extensão para minúsculo
+              $extensao = strtolower ( $extensao );
+              if ( strstr ( '.jpg;.jpeg;.png', $extensao ) ) {
+                  // Cria um nome único para esta imagem
+                  // Evita que duplique as imagens no servidor.
+                  // Evita nomes com acentos, espaços e caracteres não alfanuméricos
+                  $novoNome = uniqid ( rand ()) . '.' . $extensao;
+                                  
+                  // Concatena a pasta com o nome
+                  $destino = '../img/aulas/' . $novoNome;
+                  $retorno = $objCrudAula->cadastrarAula($titulo,$data,$hora,$descricao,$link,$novoNome,$idCurso);
+                  if($retorno == true){
+                    // tenta mover o arquivo para o destino
+                      if (!@move_uploaded_file($arquivo_tmp, $destino)){
+                        echo 'Erro ao salvar o arquivo. Aparentemente você não tem permissão de escrita.<br />';
+
+                      }else{
+                        echo '1';
+                      }
+                      
+
+                  }
+
+              }else{               
+                echo "2"; // erro de extensao;
+              } 
+          // fim imagem escolhida
+          }else{
+              $retorno = $objCrudAula->cadastrarAula($titulo,$data,$hora,$descricao,$link,$img,$idCurso);
+              if($retorno == true){
+              
+                echo '1';
+
+              }else{
+                echo '2';
+              }
+          }
+          
+          break;
+        case 'listar':
+          $idCurso = $_POST['id'];
+          $objCrud = new CrudAula();
+          $retornoLista = $objCrud->listarAulas($idCurso);
+          foreach ($retornoLista as $obj) {
+            echo'<div class="col-lg-3 col-md-12" id="aula'.$obj->getId().'">';
+              echo'<div class="card">';
+                echo'<div class="card-header">';
+                    echo'<h3>'.$obj->getTitulo().'</h3>';
+                    echo'<div class="card-header-right" >';
+                        echo'<ul class="list-unstyled"  >';
+                          echo'<li style="display: inline; padding-right: 10px;"><a class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Editar aula" onclick="editarAula('.$obj->getId().')" href="#"><i class="ik ik-edit"></i></a></li>';
+                          echo'<li style="display: inline;"><a class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Excluir aula" onclick="excluirAula('.$obj->getId().')" href="#"><i class="ik ik-trash"></i></a></li>';
+                        echo'</ul>';
+                    echo'</div>';
+                echo'</div>';
+                echo'<div class="card-body timeline">';
+                  echo'<div id="divImgAula'.$obj->getId().'" data-img="../img/aulas/'.$obj->getImg().'" class="header bg-theme" style="background-image: url(../img/aulas/'.$obj->getImg().')">';
+                    echo'<div class="color-overlay d-flex align-items-center">';
+          
+                     // echo'<div class="day-number">8</div>';
+                      echo'<div class="date-right">';
+                        echo'<div class="day-name">Inicio das Aulas</div>';
+                        echo'<div class="day-name">'.$obj->getData().'</div>';
+                        echo'<div class="month">'.$obj->getHora().'</div>';
+                      echo'</div>';
+                    echo'</div>'; 
+          
+                  echo'</div>';  
+                echo'</div>';
+          
+            echo'</div>';         
+          echo'</div>';
+          echo'</div>';
+          
+             
+             
+           
+          }
+          break;
+        case 'excluir-aula':
+          $idAula = $_POST['id'];
+          $imgAula = $_POST['img'];
+          
+          $objCrudAula = new CrudAula();
+          $excluirAula = $objCrudAula->excluirAula($idAula);
+           
+          if($excluirAula == true){
+            if( file_exists( $imgAula ) ){
+              unlink($imgAula);
+            }
+            echo "1";
+          }else if($excluirAula == false){
+            echo "2";
+          }
+          break;
+        case 'editar-aula':
+          $idAula = $_POST['idAula'];
+          $titulo = $_POST['titulo'];
+          $data = $_POST['data'];
+          $hora = $_POST['hora'];
+          $descricao = $_POST['descricao'];
+          $link = $_POST['link'];
+          $img = $_FILES["img"]["tmp_name"];
+          $imgTemp = $_POST['img-temp'];
+          if($img == ""){
+            $objCrudAula = new CrudAula();
+            $retorno2 = $objCrudAula->editarAula($idAula,$titulo,$data,$hora,$descricao,$link,$imgTemp);
+            if($retorno2 == true){
+              echo "1";
+            }else{
+              echo "2";
+            }
+          
+          }else{
+
+            if ( isset( $_FILES[ 'img' ][ 'name' ] ) && $_FILES[ 'img' ][ 'error' ] == 0 ) {
+                $arquivo_tmp = $_FILES[ 'img' ][ 'tmp_name' ];
+                $nomeImg = $_FILES[ 'img' ][ 'name' ];
+                // Pega a extensão
+                $extensao = pathinfo ( $nomeImg, PATHINFO_EXTENSION );
+          
+                // Converte a extensão para minúsculo
+                $extensao = strtolower ( $extensao );
+                if ( strstr ( '.jpg;.jpeg;.png', $extensao ) ) {
+                    // Cria um nome único para esta imagem
+                    // Evita que duplique as imagens no servidor.
+                    // Evita nomes com acentos, espaços e caracteres não alfanuméricos
+                    $novoNome = uniqid ( rand ()) . '.' . $extensao;
+                                    
+                    // Concatena a pasta com o nome
+                    $destino = '../img/aulas/' . $novoNome;
+                    $remover = '../img/aulas/' . $imgTemp;
+                    
+                    
+                    //$retorno3 = $objCrudCurso->editarCurso($id,$nome,$novoNome,$hashtag,$descricao,$idProfessor);
+                    if( file_exists( $remover ) ){
+                      unlink( $remover );
+                      $retorno3 =$objCrudAula->editarAula($idAula,$titulo,$data,$hora,$descricao,$link,$novoNome);
+                      if($retorno3 == true){
+                          // tenta mover o arquivo para o destino
+                          if (!@move_uploaded_file($arquivo_tmp, $destino)){
+                              echo "3";
+
+                          }
+                          echo "1";
+                          
+                          
+                      }else{
+                          echo "2";
+                      }
+                    }else{
+                      $retorno3 = $objCrudAula->editarAula($idAula,$titulo,$data,$hora,$descricao,$link,$novoNome);
+                      if($retorno3 == true){
+                          // tenta mover o arquivo para o destino
+                          if (!@move_uploaded_file($arquivo_tmp, $destino)){
+                              echo '3';
+
+                          }
+                          echo '1';
+                          
+                          
+                      }else{
+                          echo '2';
+                      }
+
+                    }
+                    
+                    
+                }
+              
+
+            }
+
+            
+          }
+         
+          break;
+          
+  
+
+
+      }
+
 }
+
+  
 
 ?>

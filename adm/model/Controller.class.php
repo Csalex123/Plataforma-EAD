@@ -1,6 +1,8 @@
 <?php
 include_once "CrudProfessor.class.php";
 include_once "CrudCurso.class.php";
+include_once "CrudAluno.class.php";
+include_once "CrudAula.class.php";
 include_once "Professor.class.php";
 include_once "Curso.class.php";
 /**
@@ -67,11 +69,14 @@ class Controller{
 
         $objCrud = new CrudCurso();
         $retornoLista = $objCrud->listarCursos();
+        $objCrudAula = new CrudAula();
         foreach ($retornoLista as $obj) {
+            
+                
             echo'<div class="col-xl-3 col-md-6" id="'.$obj->getId().'">';
             echo'    <div class="card sale-card">';
             echo'        <div class="card-header">';
-            echo'            <h3>'.$obj->getNome().'</h3>';
+            echo'            <h3 id="nomeCurso'.$obj->getId().'">'.$obj->getNome().'</h3>';
             echo'            <div class="dropdown no-arrow" style="top:20px; right: 10px; position: absolute;">';
             echo'                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" style="color:black;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
             echo'                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>';
@@ -81,7 +86,7 @@ class Controller{
             echo'                    <a class="dropdown-item" href="#" onclick="editar('.$obj->getId().')">Editar</a>';
             echo'                    <a class="dropdown-item" href="#" onclick="excluir('.$obj->getId().')">Excluir</a>';
             echo'                    <div class="dropdown-divider"></div> ';
-            echo'                    <a class="dropdown-item" href="#">Adicionar Conteudo</a>';
+            echo'                    <a class="dropdown-item" href="#" onclick="addAula('.$obj->getId().')">Adicionar Aula</a>';
             echo'                </div>';
             echo'            </div>';
             echo'        </div>';
@@ -95,17 +100,25 @@ class Controller{
             echo'                    <p class="mb-0"><a href="#listarAlunos" data-toggle="modal" data-target="#listarAlunos">Alunos</a></p>';
             echo'                </div>';
             echo'                <div class="col-6 border-left">';
-            echo'                    <h5 class="fw-700 mb-0">0</h5>';
-            echo'                    <p class="mb-0"><a href="#editLayoutItem" data-toggle="modal" data-target="#editLayoutItem">Aulas</a></p>';
+                                     
+                                   
+                                      
+            echo'                    <h5 class="fw-700 mb-0" id="qtdeAulas'.$obj->getId().'">'.count($objCrudAula->listarAulas($obj->getId())).'</h5>';
+            echo'                    <p class="mb-0"><a href="#fullwindowModal" onclick="listarAulas('.$obj->getId().')" data-toggle="modal" data-target="#fullwindowModal">Aulas</a></p></p>';
             echo'                </div>';
             echo'            </div>';
             echo'        </div>';
             echo'    </div>';
             echo'</div>';
-         
+          
         }
   
-      }
+    }
+    //--------------------------
+    public function listarAulas(){
+
+         
+    }
 	
 }
 

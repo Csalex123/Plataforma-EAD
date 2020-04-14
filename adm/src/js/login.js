@@ -38,6 +38,7 @@ $(document).ready(function(){
                     }); 
                 
                 }else{
+
                     var email = $("#txtEmail").val();
                     var senha = $("#txtSenha").val();
 

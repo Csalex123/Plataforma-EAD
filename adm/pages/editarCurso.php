@@ -123,7 +123,7 @@ $objCurso = $objCrud->consultarCursoId($idCurso);
                                             <input type="hidden" name="entidade" value="curso">
 
                                             <div class="col-md-12">
-                                                <button type="submit" class="btn btn-primary" style="float: right;">Editar Treinamento</button>
+                                                <button type="submit" class="btn btn-primary" style="float: right;">Salvar Alterações</button>
                                             </div>
 
                                         </div>
