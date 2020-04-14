@@ -37,9 +37,9 @@ class Login extends Conexao{
 			se ele tiver ficado mais de 900 segundos sem atividade ele destrói a session
 			se não ele renova o tempo e ai é contado mais 900 segundos*/
 			if($segundos>$limite){
-				echo "<script>alert('Sua sessão expirou! Faça o login novamente')</script>";
+				//echo "<script>alert('Sua sessão expirou! Faça o login novamente')</script>";
 				session_destroy();
-				$this->atualizarSessaoBD(0,unserialize($this->getUser())->getId());
+				//$this->atualizarSessaoBD(0,unserialize($this->getUser())->getId());
 			
 				
 				header("Location: ../login.php");
@@ -109,7 +109,7 @@ class Login extends Conexao{
 				if($users[0]['senha'] == $senha){
 
 					
-					if($this->atualizarSessaoBD(1, $users[0]["id"]) == true){
+					//if($this->atualizarSessaoBD(1, $users[0]["id"]) == true){
 						$objAdministrador =  new Administrador();
 	
 						$objAdministrador->setId($users[0]["id"]);
@@ -122,7 +122,7 @@ class Login extends Conexao{
  						$_SESSION['limite'] = $this->tempolimite; // armazena o tempo limite sem atividade //
 			
 						return 'loginEfetuado';
-					}
+					//}
 					
 			
 				}else{
@@ -147,7 +147,7 @@ class Login extends Conexao{
 	}
 
 	public function deslogar(){
-		$this->atualizarSessaoBD(0,unserialize($this->getUser())->getId());
+		//$this->atualizarSessaoBD(0,unserialize($this->getUser())->getId());
 		session_destroy();
 		header("Location: ../../login.php");
 	}

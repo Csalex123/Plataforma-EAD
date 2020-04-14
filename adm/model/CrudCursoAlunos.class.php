@@ -3,6 +3,7 @@
 include_once "Conexao.class.php";
 include_once "Aluno.class.php";
 include_once "Curso.class.php";
+include_once "Professor.class.php";
 include_once "CursoAlunos.class.php";
 
 /**
@@ -45,6 +46,52 @@ class CrudCursoAlunos extends Conexao{
           }
 
           return $listaAlunosCurso;
+
+      } catch(PDOException $e) {
+        
+        echo 'Error: ' . $e->getMessage();
+        return false;
+      }
+
+    }
+
+    public function listarCursosAluno($idAluno){
+      
+      try {
+        $conn = $this->conectar();
+        $sql = "SELECT curso.*, professor.nome as nomeProfessor from cursoalunos INNER JOIN aluno ON cursoalunos.idAluno = aluno.id INNER JOIN curso ON cursoalunos.idCurso = curso.id INNER JOIN professor ON curso.idProfessor = professor.id where aluno.id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(1, $idAluno, PDO::PARAM_INT);
+        $listarCursosAluno = array();
+              
+          if ($stmt->execute()) {
+             
+              while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {
+                  $objCursoAlunos = new CursoAlunos();
+                  $objProfessor = new Professor();
+                  $objCurso = new Curso();
+
+                  $objCurso->setId($rs->id);
+                  $objCurso->setNome($rs->nome);
+                  $objCurso->setImg($rs->img);
+                  $objCurso->setDescricao($rs->descricao);
+                  $objCurso->setHashtag($rs->hashtag);
+                  $objProfessor->setId($rs->idProfessor);
+                  $objProfessor->setNome($rs->nomeProfessor);
+                  $objCurso->setObjProfessor($objProfessor);
+
+
+
+                  $objCursoAlunos->setObjCurso($objCurso);
+                  
+                  $listarCursosAluno[]=$objCursoAlunos;
+              }
+
+          } else {
+              echo "Erro: Não foi possível recuperar os dados do banco de dados";
+          }
+
+          return $listarCursosAluno;
 
       } catch(PDOException $e) {
         

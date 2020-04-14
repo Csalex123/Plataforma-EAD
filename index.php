@@ -5,11 +5,11 @@ session_start();
 if (!isset($_SESSION['logged_in'])) {
     $_SESSION['logged_in'] = false;
 }
-
+/*
 if ($_SESSION['logged_in']) {
     header('Location: aulas-online/');
     exit;
-}
+}*/
 
 ?>
 
@@ -142,7 +142,7 @@ if ($_SESSION['logged_in']) {
                         $(".msg").css("color","yellow");
                         $(".msg").html("Já existe uma pessoa nesta conta.");
                         $(".msg").show();
-                    } else {
+                    } else if(retorno == "loginEfetuado") {
                         window.location = "../curso/aulas-online/";
                         $(".msg").hide();
                     }

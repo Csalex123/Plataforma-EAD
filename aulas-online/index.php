@@ -1,10 +1,13 @@
 <?php
-
+/*
 session_start();
 
 require '../model/init.php';
 require '../model/check.php';
-require '../model/destroySession.php';
+require '../model/destroySession.php';*/
+include_once "../model/Controller.class.php";
+
+$objController = new Controller();
 
 ?>
 
@@ -72,27 +75,10 @@ require '../model/destroySession.php';
 
     </div>
 
+    <?php $objController->listarCursosAluno(1); ?>
 
 
-    <main>
-        <div class="flex-main">
-            <div>
-                <img src="img/img_0006.jpg" alt="">
-            </div>
-            <div>
-                <span class="hashtag">#Instagram e Facebook</span><br>
-                <span class="title">INSTAGRAM E FACEBOOK ADS</span> <br>
-                <span class="paragraph">Amplie seus resultados, com técnicas avançadas de vendas nas principais
-                    plataformas
-                    de relacionamento com o público.</span>
-            </div>
-        </div>
-        <span class="paragraph-2">Amplie seus resultados, com técnicas avançadas de vendas nas principais
-            plataformas
-            de relacionamento com o público.</span>
-    </main>
-
-
+    <!--
     <section class="container-lessons">
         <section class="accordion">
             <input type="checkbox" id="handle1">
@@ -195,7 +181,7 @@ require '../model/destroySession.php';
             </div>
         </section>
     </section>
-
+    -->
     <section class="container-3">
         <div class="sub-1">
             <img src="img/img_0008.png">

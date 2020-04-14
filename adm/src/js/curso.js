@@ -1,25 +1,3 @@
-$(document).ready(() => {
-    $("#body-2").hide();
-    $("#openCadastro").click(() => {
-        $("#body-1").hide();
-        $("#body-2").show();
-    });
-
-    $("#closeCadastro").click(() => {
-        $("#body-1").show();
-        $("#body-2").hide();
-    });
-
-    $("#data").mask('00/00/0000');
-
-    $('.html-editor').summernote({
-        height: 300,
-        tabsize: 2
-    });
-    //--------
-
-});
-
 
 function editar(id){
     document.getElementById('id').value = id;
@@ -121,7 +99,7 @@ $(document).ready(function(){
                 contentType: false,
                 processData: false
             }).done(function(res){
-                alert(res);
+                
                 if(res == "1"){
                     
                     Swal.fire({

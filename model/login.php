@@ -49,5 +49,5 @@ $_SESSION['logged_in'] = true;
 $_SESSION['user_id'] = $user['id'];
 $_SESSION['user_email'] = $user['email'];
 $_SESSION['user_sessionLogin'] = $user['sessionLogin'];
- 
-header('Location: aulas-online/index.php');
+
+echo "loginEfetuado";

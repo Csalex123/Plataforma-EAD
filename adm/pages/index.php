@@ -87,7 +87,7 @@ $objLogin->verificarLogado();
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="state">
                                                 <h6>Aulas</h6>
-                                                <h2 id="dashAula">0</h2>
+                                                <h2 id="dashAulas">0</h2>
                                             </div>
                                             <div class="icon">
                                                 <i class="ik ik-clipboard"></i>
@@ -103,7 +103,7 @@ $objLogin->verificarLogado();
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="state">
                                                 <h6>Professores</h6>
-                                                <h2 id="dashProfessores">5</h2>
+                                                <h2 id="dashProfessores">0</h2>
                                             </div>
                                             <div class="icon">
                                                 <i class="ik ik-users"></i>
@@ -183,10 +183,13 @@ $objLogin->verificarLogado();
                         metodo:'atualizar',
                         entidade:'dashboard'
                 }, function(data){
+                   
                     var dash = data.split(",");
+                   
                     document.getElementById('dashAlunos').innerHTML = dash[0];
                     document.getElementById('dashCursos').innerHTML = dash[1];
                     document.getElementById('dashAulas').innerHTML = dash[2];
+                    
                     document.getElementById('dashProfessores').innerHTML = dash[3];
                     
                 });
